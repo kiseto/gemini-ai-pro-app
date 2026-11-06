@@ -1,107 +1,135 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { APP_INFO } from "@/constants/app-info";
-import { GithubIcon } from "@/components/icons";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export function Footer() {
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
 	return (
-		<footer className="border-t border-border/60 bg-card/60 py-16 text-xs text-muted-foreground backdrop-blur-md">
+		<footer className="relative z-10 -mt-px bg-background pt-16 pb-16 text-xs text-muted-foreground sm:pt-24 sm:pb-24">
 			<div className="container mx-auto max-w-6xl px-4 sm:px-6">
-				<div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+				{/* Main Content: Brand Overview & Navigation Columns */}
+				<div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
 					{/* Brand Column */}
-					<div className="space-y-4 md:col-span-2">
+					<div className="max-w-md space-y-3.5">
 						<div className="flex items-center gap-2.5">
-							<img src="/icons/32.png" alt={APP_INFO.name} className="size-7 object-contain" />
-							<span className="text-sm font-bold tracking-tight text-foreground">
+							<img
+								src="/icons/128.png"
+								alt={APP_INFO.name}
+								width={36}
+								height={36}
+								className="size-8 shrink-0 object-contain sm:size-9"
+								loading="lazy"
+							/>
+							<span className="text-base font-bold tracking-tight text-foreground sm:text-lg">
 								{APP_INFO.name}
 							</span>
 						</div>
-						<p className="max-w-md text-xs leading-relaxed text-muted-foreground">
+
+						<p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
 							{APP_INFO.description}
 						</p>
-						<div className="pt-1 text-[11px] text-muted-foreground/80">
-							Open-source project licensed under MIT. Built for personal productivity, transparency,
-							and educational research.
-						</div>
 					</div>
 
-					{/* Navigation Links */}
-					<div className="space-y-3">
-						<h4 className="font-mono text-xs font-semibold tracking-wider text-foreground uppercase">
-							Navigation
-						</h4>
-						<ul className="space-y-2 text-xs">
-							<li>
+					{/* Navigation Columns (Clean, Typography-Driven, Zero Icon Clutter) */}
+					<div className="grid grid-cols-2 gap-10 sm:gap-16 lg:gap-20">
+						{/* Column 1: Portal Navigation */}
+						<div className="flex flex-col space-y-4 sm:space-y-5">
+							<span className="font-mono text-xs font-semibold tracking-wider text-foreground uppercase">
+								Portal
+							</span>
+							<div className="flex flex-col space-y-2.5 text-xs">
 								<a href="#preview" className="transition-colors hover:text-foreground">
-									Architecture Specs
+									Extension Sandbox
 								</a>
-							</li>
-							<li>
 								<a href="#stacking" className="transition-colors hover:text-foreground">
 									24-Month Stacking
 								</a>
-							</li>
-							<li>
 								<a href="#install" className="transition-colors hover:text-foreground">
 									Installation Guide
 								</a>
-							</li>
-							<li>
 								<a href="#faq" className="transition-colors hover:text-foreground">
-									Frequently Asked Questions
+									Questions & Answers
 								</a>
-							</li>
-						</ul>
-					</div>
+								<a href="#support" className="transition-colors hover:text-foreground">
+									Support Tooling
+								</a>
+							</div>
+						</div>
 
-					{/* External Resources */}
-					<div className="space-y-3">
-						<h4 className="font-mono text-xs font-semibold tracking-wider text-foreground uppercase">
-							Official Google Links
-						</h4>
-						<ul className="space-y-2 text-xs">
-							<li>
+						{/* Column 2: Resources & Official Platform */}
+						<div className="flex flex-col space-y-4 sm:space-y-5">
+							<span className="font-mono text-xs font-semibold tracking-wider text-foreground uppercase">
+								Resources
+							</span>
+							<div className="flex flex-col space-y-2.5 text-xs">
 								<a
 									href={APP_INFO.googleOneUrl}
 									target="_blank"
-									rel="noreferrer"
-									className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+									rel="noreferrer noopener"
+									className="transition-colors hover:text-foreground"
 								>
-									Google One Plans <ExternalLink className="size-3" />
+									Google One Plans
 								</a>
-							</li>
-							<li>
 								<a
-									href={APP_INFO.googlePlaySubsUrl}
+									href={APP_INFO.releaseZipUrl}
 									target="_blank"
-									rel="noreferrer"
-									className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+									rel="noreferrer noopener"
+									className="transition-colors hover:text-foreground"
 								>
-									Google Play Subscriptions <ExternalLink className="size-3" />
+									Download Extension (.zip)
 								</a>
-							</li>
-							<li>
 								<a
 									href={APP_INFO.githubUrl}
 									target="_blank"
-									rel="noreferrer"
-									className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+									rel="noreferrer noopener"
+									className="transition-colors hover:text-foreground"
 								>
-									GitHub Repository <GithubIcon className="size-3" />
+									GitHub Repository
 								</a>
-							</li>
-						</ul>
+								<a
+									href={APP_INFO.githubReleasesUrl}
+									target="_blank"
+									rel="noreferrer noopener"
+									className="transition-colors hover:text-foreground"
+								>
+									Releases & Changelog
+								</a>
+								<a
+									href={`${APP_INFO.githubUrl}/blob/main/LICENSE`}
+									target="_blank"
+									rel="noreferrer noopener"
+									className="transition-colors hover:text-foreground"
+								>
+									MIT License
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 
-				{/* Bottom Bar */}
-				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-8 sm:flex-row">
-					<div className="font-mono text-[11px] text-muted-foreground">
-						© {CURRENT_YEAR} {APP_INFO.name}. All rights reserved.
-					</div>
-					<div className="font-mono text-[11px] text-muted-foreground/80">
-						Not affiliated with or endorsed by Google LLC or Alphabet Inc.
+				{/* Hairline Divider & Bottom Bar */}
+				<div className="mt-14 border-t border-border/40 pt-8 sm:mt-16">
+					<div className="flex flex-col items-start justify-between gap-4 text-[11px] leading-relaxed text-muted-foreground/75 sm:flex-row sm:items-center">
+						<div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+							<span>
+								© {CURRENT_YEAR} {APP_INFO.name}.
+							</span>
+							<span>•</span>
+							<span>Not affiliated with or endorsed by Google LLC or Alphabet Inc.</span>
+						</div>
+
+						<button
+							type="button"
+							onClick={scrollToTop}
+							className="inline-flex cursor-pointer items-center gap-1.5 font-mono text-[11px] whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
+						>
+							<span>Back to top</span>
+							<ArrowUp className="size-3" />
+						</button>
 					</div>
 				</div>
 			</div>

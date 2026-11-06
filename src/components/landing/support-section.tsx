@@ -110,8 +110,8 @@ export function SupportSection() {
 						))}
 					</div>
 
-					{/* Footer Attribution */}
-					<div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
+					{/* Developer Attribution */}
+					<div className="mt-8 flex flex-col items-center justify-between gap-3 pt-2 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
 						<div>
 							<span>Crafted by </span>
 							<a

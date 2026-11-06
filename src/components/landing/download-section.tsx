@@ -8,7 +8,7 @@ export function DownloadSection() {
 		<section
 			id="download"
 			onContextMenu={(e) => e.preventDefault()}
-			className="relative flex min-h-[65vh] w-full items-center justify-center overflow-hidden px-4 py-28 sm:px-6 sm:py-36"
+			className="relative -mb-px flex min-h-[70vh] w-full items-center justify-center overflow-hidden bg-background px-4 pt-28 pb-36 sm:px-6 sm:pt-36 sm:pb-48"
 		>
 			{/* Atmospheric Grainient Background */}
 			<div className="pointer-events-auto absolute inset-0 z-0">
@@ -32,10 +32,10 @@ export function DownloadSection() {
 			</div>
 
 			{/* Smooth top blend transitioning from the Support section */}
-			<div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-36 bg-linear-to-b from-background to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 -top-1 z-0 h-40 bg-linear-to-b from-background to-transparent sm:h-48" />
 
 			{/* Smooth bottom blend dissolving into the Footer */}
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-44 bg-linear-to-t from-background to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 -bottom-1 z-0 h-48 bg-linear-to-t from-background to-transparent sm:h-64" />
 
 			{/* Centered Content: [Logo] -> [Headline] -> [Description] -> [CTA] -> [Proofline] */}
 			<div className="relative z-10 flex w-full max-w-2xl flex-col items-center text-center">
@@ -66,16 +66,10 @@ export function DownloadSection() {
 						rel="noreferrer noopener"
 						className="group relative cursor-pointer overflow-hidden rounded-full border border-white/60 bg-linear-to-b from-white via-[#fafafa] to-[#e8e8e8] px-10 py-4 text-[16px] font-semibold text-neutral-900 shadow-[0_12px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-300 ease-out hover:from-white hover:to-[#f2f2f2] hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] active:scale-[0.98] sm:px-11 sm:py-4.5 sm:text-[17px]"
 					>
-						Download Extension (.zip)
+						Download Extension
 					</a>
-
-					{/* Technical proofline */}
-					<span className="font-mono text-[11px] tracking-wide text-white/50">
-						v{APP_INFO.version} · Manifest V3 · Chrome, Brave & Edge · Zero Telemetry
-					</span>
 				</div>
 			</div>
 		</section>
 	);
 }
-
