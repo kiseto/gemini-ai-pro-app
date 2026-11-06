@@ -24,13 +24,13 @@
 **Google AI Pro Portal** is a dual-target project providing:
 
 1. **A modern, high-performance web landing page**: Featuring an interactive live simulator, 4-tier stacking visualizer, step-by-step tutorial, FAQ accordion, and release download links.
-2. **A Manifest V3 browser extension**: An intelligent client-side utility that mounts on `https://one.google.com/plans`. It intercepts checkout requests to inject promotional offer tokens for the **Google One 5TB AI Premium** plan and provides an automated **Price Safety Guard** inside Google Play iframes to guarantee users never confirm an unexpected paid charge.
+2. **A Manifest V3 browser extension**: An intelligent client-side utility that mounts on `https://one.google.com/plans`. It assists Google One subscribers by applying eligible promotional offer tiers for the **Google One 5TB AI Premium** plan and provides an automated **Price Safety Guard** inside Google Play checkout iframes to verify promotional terms in real time.
 
 ---
 
 ## 🎯 Key Features
 
-- **⚡ One-Click Promotional Tier Injection**: Instantly activate eligible promotional tokens for **Tier 1 (12 Months)**, **Tier 2 (6 Months SS)**, **Tier 3 (6 Months)**, and **Tier 4 (6 Months Backup)**, with optional YouTube Premium add-on token support.
+- **⚡ One-Click Promotional Tier Management**: Easily select eligible promotional tiers for **Tier 1 (12 Months)**, **Tier 2 (6 Months SS)**, **Tier 3 (6 Months)**, and **Tier 4 (6 Months Backup)**, with optional YouTube Premium add-on token support.
 - **🛡️ Google Play Checkout Safety Guard**: Inspects live checkout terms inside `tokenized.play.google.com` iframes. Built with declarative Lucide iconography, strict TrustedTypes-compliant DOM creation, and smooth dismissal animations:
   - 🟢 **Safe ($0.00 Trial)**: Confirms genuine zero-charge trial status with badge and date details.
   - 🔴 **Danger (Unexpected Charge)**: Warns immediately if a monthly/annual charge is detected so you never confirm an unexpected billing.
@@ -107,11 +107,11 @@ Google One allows promotional offer stacking across eligible billing transitions
 
 | Tier       |      Duration      |     Type     | Recommended Order | Description                                                                 |
 | :--------- | :----------------: | :----------: | :---------------: | :-------------------------------------------------------------------------- |
-| **Tier 1** |   **12 Months**    | Introductory |  1st Activation   | Initial 1-year promotional offer for new or reset subscribers.              |
-| **Tier 2** | **6 Months (SS)**  |  Stacking A  |  2nd Activation   | Applied while Tier 1 is active to stack an additional 6 months.             |
-| **Tier 3** |    **6 Months**    |  Stacking B  |  3rd Activation   | Secondary extension stacking an additional 6 months (totaling 24M).         |
+| **Tier 1** |   **12 Months**    | Introductory |  1st Application  | Initial 1-year promotional offer for new or reset subscribers.              |
+| **Tier 2** | **6 Months (SS)**  |  Stacking A  |  2nd Application  | Applied while Tier 1 is active to stack an additional 6 months.             |
+| **Tier 3** |    **6 Months**    |  Stacking B  |  3rd Application  | Secondary extension stacking an additional 6 months (totaling 24M).         |
 | **Tier 4** | **6 Months (Alt)** |  Alternate   |     Fallback      | Backup promotional token if Tier 2 or Tier 3 encounters eligibility errors. |
-| **Off**    |    **0 Months**    |    Bypass    |     Standard      | Standard Google One checkout without promotional injection.                 |
+| **Off**    |    **0 Months**    |    Bypass    |     Standard      | Standard Google One checkout without promotional modifications.             |
 
 ---
 
@@ -151,12 +151,14 @@ gemini-ai-pro-app/
 │   │   ├── ui/                     # shadcn/ui primitives (Button, Badge, Tabs, Dialog, etc.)
 │   │   └── landing/                # Modular landing page sections:
 │   │       ├── floating-navbar.tsx # Scroll-revealed capsule navigation
-│   │       ├── hero.tsx            # Hero section with interactive CTA
+│   │       ├── hero.tsx            # Hero section with Grainient WebGL background & CTA
 │   │       ├── preview-section.tsx # Interactive extension sandbox & live simulation
 │   │       ├── stacking-section.tsx # 24-month promotional stacking architecture
 │   │       ├── install-section.tsx # Manual installation instructions & ZIP download
 │   │       ├── faq-section.tsx     # Frequently asked questions accordion
-│   │       └── footer.tsx          # Brand footer with quick navigation links
+│   │       ├── support-section.tsx # Independent tooling support & developer attribution
+│   │       ├── download-section.tsx # Secondary download loop section with smooth blend
+│   │       └── footer.tsx          # Brand footer with quick navigation links & disclaimers
 │   └── extension/                  # Manifest V3 Extension Source
 │       ├── components/             # Modular Popup UI Components
 │       │   ├── guide-tab.tsx       # Connected timeline 7-step guide

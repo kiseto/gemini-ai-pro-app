@@ -2,12 +2,12 @@ export const APP_INFO = {
 	name: "Google AI Pro Portal",
 	shortName: "AI Pro Portal",
 	version: "1.0.0",
-	tagline: "Smart Subscription & Offer Injector for Google AI Pro",
-	title: "Google AI Pro Portal — Streamline & Verify Google AI Pro Benefits",
+	tagline: "Open-Source Promotional Companion & Checkout Guard for Google One",
+	title: "Google AI Pro Portal",
 	description:
-		"An intelligent, client-side browser extension and companion tool that injects promotional offer tokens and guards your checkout for Google One 5TB AI Premium tier.",
+		"An independent, client-side browser extension and companion tool that helps Google One subscribers apply eligible promotional tiers and verifies checkout pricing in real time.",
 	shortDescription:
-		"Inject eligible promotional offer tokens with real-time $0.00 checkout protection.",
+		"Apply eligible promotional offer tiers with real-time checkout price verification.",
 	author: "Antigravity Engineering",
 	githubUrl: "https://github.com/nmrisrl11/gemini-ai-pro-app",
 	githubReleasesUrl: "https://github.com/nmrisrl11/gemini-ai-pro-app/releases",

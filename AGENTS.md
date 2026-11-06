@@ -11,7 +11,7 @@
 - **Short Name**: `AI Pro Portal`
 - **Repository Name**: `gemini-ai-pro-app` _(The directory and GitHub repo name must remain `gemini-ai-pro-app`)_
 - **Application Version**: `1.0.0`
-- **Core Purpose**: A unified monorepo containing both a modern landing page web application and an automated Manifest V3 browser extension for Google One 5TB AI Premium promotional offer injection and Google Play checkout price verification.
+- **Core Purpose**: A unified monorepo containing both a modern landing page web application and an automated Manifest V3 browser extension for Google One 5TB AI Premium promotional offer management and Google Play checkout price verification.
 - **Upstream Blueprints**:
   1. [`sulok`](https://github.com/nmrisrl11/sulok): Dual Vite configuration (`vite.config.ts` vs `vite.ext.config.ts`), `vite-plugin-web-extension`, automated extension packaging script, Tailwind CSS v4, React 19, and Radix UI / shadcn component patterns.
   2. [`google-pro-helper-main`](https://github.com/nmrisrl11/google-pro-helper-main): Checkout request interception logic, Google One protobuf SKU patching, and Google Play checkout price verification guard, re-engineered into clean, typed, idiomatic English TypeScript.
@@ -217,7 +217,7 @@ gemini-ai-pro-app/
 │   ├── components/
 │   │   ├── icons.tsx               # Brand SVG icons (GitHub, YouTube)
 │   │   ├── ui/                     # Radix / shadcn accessible primitives
-│   │   └── landing/                # Modular landing page sections (Hero, FAQ, Guide, etc.)
+│   │   └── landing/                # Modular landing page sections (Hero, Preview, Stacking, Install, FAQ, Support, Download, Footer)
 │   └── extension/                  # Manifest V3 Extension Source
 │       ├── components/             # Modular Popup UI components
 │       │   ├── guide-tab.tsx       # Connected timeline 7-step guide

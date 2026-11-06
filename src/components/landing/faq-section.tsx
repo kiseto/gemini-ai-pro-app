@@ -9,8 +9,8 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
 	{
-		q: "Why is a US Google payment profile recommended?",
-		a: "Google configures its 5TB promotional offer SKUs specifically for the US billing region. Setting your payment profile to a US address—especially with a sales-tax-exempt postal code like 97201 in Oregon—ensures Google Play calculates a flat $0.00 checkout without state or regional tax surcharges.",
+		q: "Why are promotional offer tiers regionally specific?",
+		a: "Google configures its promotional offer SKUs for specific regional billing configurations (primarily US). Google Play evaluates offer eligibility and calculates checkout pricing according to the region and currency settings of your Google payment profile.",
 	},
 	{
 		q: "How does the Checkout Safety Guard protect me from accidental charges?",
@@ -18,15 +18,15 @@ const FAQS: FaqItem[] = [
 	},
 	{
 		q: "How does the 24-month stacking sequence work?",
-		a: "Google One allows promotional SKUs to be applied sequentially as subscription extensions. Activating Tier 1 grants 12 months. Applying Tier 2 stacks an extra 6 months (advancing renewal to month 18). Finally, applying Tier 3 adds another 6 months, locking in the maximum allowable 24 months (2 full years) on a single Google account.",
+		a: "Google One allows promotional SKUs to be applied sequentially as subscription extensions. Applying Tier 1 grants 12 months. Applying Tier 2 stacks an extra 6 months (advancing renewal to month 18). Finally, applying Tier 3 adds another 6 months, locking in the maximum allowable 24 months (2 full years) on a single Google account.",
 	},
 	{
 		q: "Will Google automatically bill my card when the promotional period ends?",
-		a: "Not if you cancel renewal. Once all tiers are stacked, open play.google.com/store/account/subscriptions and cancel the subscription. Google's policy guarantees that all 24 months of promotional 5TB storage and Gemini Advanced stay 100% active until expiration, after which your account simply reverts to the free tier with zero charges.",
+		a: "Not if you cancel renewal. Once all tiers are stacked, open play.google.com/store/account/subscriptions and cancel the subscription. Google's policy guarantees that all 24 months of promotional 5TB storage and Gemini Advanced remain fully valid until expiration, after which your account simply reverts to the free tier with zero charges.",
 	},
 	{
 		q: "Where do promotional tokens come from and how are they kept updated?",
-		a: "Promotional offer tokens are extracted directly from active Google One campaign releases and bundled into pre-compiled extension builds. When Google updates or rotates token identifiers, new releases are published to GitHub. The extension also supports local storage overrides, allowing developers to configure custom token parameters without rebuilding from source.",
+		a: "Promotional offer tokens correspond to official Google One promotional campaigns (such as hardware bundles and partner promotions). When campaigns rotate or renew, updated extension builds are published on GitHub. The extension also supports local storage overrides, allowing developers to configure custom token parameters without rebuilding from source.",
 	},
 	{
 		q: "Does this extension send any account data or tokens to an external server?",
@@ -53,8 +53,8 @@ export function FaqSection() {
 						</h2>
 
 						<p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-							Technical details about offer injection, checkout safety verification, and Google One
-							subscription stacking.
+							Technical details about promotional offer tiers, checkout safety verification, and
+							Google One subscription stacking.
 						</p>
 
 						{/* Support / Community Links */}

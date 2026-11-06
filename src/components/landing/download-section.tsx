@@ -49,13 +49,13 @@ export function DownloadSection() {
 
 				{/* Headline: High-impact display typography */}
 				<h2 className="mt-7 text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl md:leading-[1.15]">
-					Ready to claim your 24 months?
+					Ready to get started?
 				</h2>
 
 				{/* Description */}
 				<p className="mt-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
-					Free, open-source, and 100% client-side. Download the pre-compiled extension and start
-					stacking your 5TB benefits in under 60 seconds.
+					Free, open-source, and 100% client-side. Download the pre-compiled extension to manage
+					promotional tiers and verify checkout pricing safely.
 				</p>
 
 				{/* CTA Button: White tactile button matching hero */}

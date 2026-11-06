@@ -23,14 +23,14 @@ const STACK_CARDS: StackCardData[] = [
 	{
 		id: "tier-1",
 		step: "01",
-		title: "Activate base 12-month tier",
+		title: "Apply base 12-month tier",
 		duration: "Months 0 – 12",
 		description:
-			'Select Tier 1 in the extension popup and open the Google One plans page. Clicking "Get discount" injects the base promotional offer SKU into Google Play checkout, unlocking your first year at verified $0.00.',
+			'Select Tier 1 in the extension popup and open the Google One plans page. Clicking "Get discount" applies the eligible promotional offer SKU in Google Play checkout, unlocking your introductory tier with verified pricing.',
 		meta: [
 			{ label: "Extension Tier", value: "Tier 1 · 12M" },
 			{ label: "Target Account", value: "New or clean plan" },
-			{ label: "Introductory Rate", value: "$0.00 Verified", isAccent: true },
+			{ label: "Introductory Rate", value: "$0.00 (Promo Rate)", isAccent: true },
 			{ label: "Plan Benefits", value: "5TB + Gemini Advanced" },
 		],
 	},
@@ -40,10 +40,10 @@ const STACK_CARDS: StackCardData[] = [
 		title: "Stack first 6-month extension",
 		duration: "Months 12 – 18",
 		description:
-			"Once your Tier 1 subscription is active, switch to Tier 2 in the popup and refresh the plans page. Google One recognizes the secondary promo SKU as an extension layer, advancing your renewal date by 6 months.",
+			"Once your Tier 1 subscription is confirmed, switch to Tier 2 in the popup and refresh the plans page. Google One recognizes the secondary promo SKU as an extension layer, advancing your renewal date by 6 months.",
 		meta: [
 			{ label: "Extension Tier", value: "Tier 2 · 6M (Stack 1)" },
-			{ label: "Prerequisite", value: "Active Tier 1 plan" },
+			{ label: "Prerequisite", value: "Confirmed Tier 1 plan" },
 			{ label: "Charged Today", value: "$0.00 Verified", isAccent: true },
 			{ label: "Extended Total", value: "18 Months (+6M)" },
 		],
@@ -57,7 +57,7 @@ const STACK_CARDS: StackCardData[] = [
 			"Select Tier 3 in the extension and trigger checkout one final time. Google One stacks this tertiary layer on top of the previous two, reaching the maximum allowable cap of 24 consecutive months.",
 		meta: [
 			{ label: "Extension Tier", value: "Tier 3 · 6M (Stack 2)" },
-			{ label: "Prerequisite", value: "Active Tier 2 plan" },
+			{ label: "Prerequisite", value: "Confirmed Tier 2 plan" },
 			{ label: "Charged Today", value: "$0.00 Verified", isAccent: true },
 			{ label: "Cumulative Total", value: "24 Months (Max)" },
 		],
@@ -73,7 +73,7 @@ const STACK_CARDS: StackCardData[] = [
 			{ label: "Target Console", value: "Google Play Store" },
 			{ label: "Action", value: "Cancel renewal" },
 			{ label: "Promo Period", value: "100% Retained", isAccent: true },
-			{ label: "Future Charges", value: "$0.00 Guaranteed" },
+			{ label: "Future Charges", value: "No Surprise Charges" },
 		],
 		actionLink: {
 			label: "Open Google Play Subscriptions",
@@ -167,8 +167,8 @@ export function StackingSection() {
 						How stacking works.
 					</h2>
 					<p className="mt-3 text-base text-muted-foreground sm:text-lg">
-						Google One accepts promotional tokens consecutively. Follow these four steps to stack
-						offers up to 24 months at verified zero cost.
+						Google One accepts promotional tokens consecutively. Follow these four steps to apply
+						eligible promotional extension tiers with real-time checkout verification.
 					</p>
 				</div>
 

@@ -54,9 +54,9 @@ export function SupportSection() {
 						</h2>
 
 						<p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-							Google AI Pro Portal is a free, standalone utility that runs 100% locally. If it saved
-							you subscription costs or manual configuration time, contributions toward maintenance
-							and infrastructure are always appreciated.
+							AI Pro Portal is an independent, open-source companion tool that runs 100% locally in
+							your browser. Contributions toward ongoing maintenance, development, and documentation
+							are always appreciated.
 						</p>
 					</div>
 

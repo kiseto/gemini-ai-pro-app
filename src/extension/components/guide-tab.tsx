@@ -16,9 +16,8 @@ const GUIDE_STEPS: GuideStep[] = [
 		step: 1,
 		content: (
 			<>
-				Open <b className="text-foreground">one.google.com/plans</b> and ensure your Google account
-				region is set to the US (use a US payment method/ZIP like{" "}
-				<b className="text-foreground">97201</b>).
+				Open <b className="text-foreground">one.google.com/plans</b> and ensure your Google Play
+				account region is configured for US promotional availability.
 			</>
 		),
 	},
@@ -61,8 +60,8 @@ const GUIDE_STEPS: GuideStep[] = [
 		step: 6,
 		content: (
 			<>
-				<b className="text-foreground">Stacking 2 Years:</b> After Tier 1 is active, switch to Tier
-				2 (Stack 1) &rarr; refresh &rarr; repeat checkout. Then switch to Tier 3.
+				<b className="text-foreground">Stacking 2 Years:</b> After Tier 1 is confirmed, switch to
+				Tier 2 (Stack 1) &rarr; refresh &rarr; repeat checkout. Then switch to Tier 3.
 			</>
 		),
 	},

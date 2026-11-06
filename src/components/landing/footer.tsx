@@ -114,12 +114,20 @@ export function Footer() {
 				{/* Hairline Divider & Bottom Bar */}
 				<div className="mt-14 border-t border-border/40 pt-8 sm:mt-16">
 					<div className="flex flex-col items-start justify-between gap-4 text-[11px] leading-relaxed text-muted-foreground/75 sm:flex-row sm:items-center">
-						<div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-							<span>
-								© {CURRENT_YEAR} {APP_INFO.name}.
+						<div className="flex flex-col gap-1">
+							<div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+								<span>
+									© {CURRENT_YEAR} {APP_INFO.shortName}.
+								</span>
+								<span>•</span>
+								<span>
+									Independent open-source project. Not affiliated with, sponsored by, or endorsed by
+									Google LLC or Alphabet Inc.
+								</span>
+							</div>
+							<span className="text-[10px] text-muted-foreground/60">
+								Google, Google One, Google Play, and Gemini are trademarks of Google LLC.
 							</span>
-							<span>•</span>
-							<span>Not affiliated with or endorsed by Google LLC or Alphabet Inc.</span>
 						</div>
 
 						<button

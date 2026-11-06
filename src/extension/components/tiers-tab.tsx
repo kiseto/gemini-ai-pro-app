@@ -120,7 +120,7 @@ export function TiersTab({ selectedLayer, disabled = false, onSelectLayer }: Tie
 			>
 				<span className="flex items-center gap-1.5">
 					<ShieldCheck className="size-3.5 text-emerald-600" />
-					Checkout Guard Active
+					Checkout Guard Enabled
 				</span>
 				<span className="text-[10px]">Auto $0.00 verification</span>
 			</div>

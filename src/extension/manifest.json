@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Google AI Pro Portal",
 	"version": "1.0.0",
-	"description": "Smart subscription & promo offer injector for Google One AI Premium with checkout safety guard.",
+	"description": "Open-source companion extension to apply eligible promotional offer tiers and verify Google Play checkout safety.",
 	"permissions": ["storage"],
 	"host_permissions": [
 		"https://one.google.com/*",

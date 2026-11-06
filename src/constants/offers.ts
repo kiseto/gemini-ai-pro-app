@@ -20,7 +20,7 @@ export const OFFER_TIERS: Record<OfferTierId, OfferTierConfig> = {
 		months: 0,
 		tag: "Inactive",
 		tagVariant: "outline",
-		description: "Standard Google One checkout without promotional injection.",
+		description: "Standard Google One checkout without promotional modifications.",
 	},
 	"12m": {
 		id: "12m",
@@ -40,7 +40,7 @@ export const OFFER_TIERS: Record<OfferTierId, OfferTierConfig> = {
 		months: 6,
 		tag: "Stacking A",
 		tagVariant: "secondary",
-		description: "First extension layer to stack an extra 6 months onto an active subscription.",
+		description: "First extension layer to stack an extra 6 months onto an existing subscription.",
 		stackingOrder: 2,
 	},
 	"6m": {
