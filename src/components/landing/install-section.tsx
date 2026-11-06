@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { APP_INFO } from "@/constants/app-info";
 
-export function InstallGuide() {
+export function InstallSection() {
 	const [copied, setCopied] = useState(false);
 
 	const copyExtensionUrl = () => {

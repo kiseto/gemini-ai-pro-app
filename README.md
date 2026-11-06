@@ -150,12 +150,11 @@ gemini-ai-pro-app/
 │   │   ├── icons.tsx               # Custom SVG brand icons (GitHub, YouTube)
 │   │   ├── ui/                     # shadcn/ui primitives (Button, Badge, Tabs, Dialog, etc.)
 │   │   └── landing/                # Modular landing page sections:
-│   │       ├── navbar.tsx          # Sticky navigation with theme toggle & release link
-│   │       ├── hero.tsx            # Hero section with live interactive extension simulator
-│   │       ├── features-grid.tsx   # 6 core feature highlights
-│   │       ├── stacking-visualizer.tsx # Interactive 4-tier stacking timeline
-│   │       ├── workflow-steps.tsx  # 7-step process walkthrough
-│   │       ├── install-guide.tsx   # Manual installation instructions & ZIP download
+│   │       ├── floating-navbar.tsx # Scroll-revealed capsule navigation
+│   │       ├── hero.tsx            # Hero section with interactive CTA
+│   │       ├── preview-section.tsx # Interactive extension sandbox & live simulation
+│   │       ├── stacking-section.tsx # 24-month promotional stacking architecture
+│   │       ├── install-section.tsx # Manual installation instructions & ZIP download
 │   │       ├── faq-section.tsx     # Frequently asked questions accordion
 │   │       └── footer.tsx          # Brand footer with quick navigation links
 │   └── extension/                  # Manifest V3 Extension Source

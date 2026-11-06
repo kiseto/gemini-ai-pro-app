@@ -21,7 +21,7 @@ const TABS: TabItem[] = [
 	{ id: "guide", label: "Guide", icon: BookOpen },
 ];
 
-export function ExtensionPreview() {
+export function PreviewSection() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
 	const [activeTab, setActiveTab] = useState<TabSection>("tiers");
