@@ -2,13 +2,54 @@ import { useState, useEffect } from "react";
 import { APP_INFO } from "@/constants/app-info";
 import { GithubIcon } from "@/components/icons";
 
+const NAV_ITEMS = [
+	{ id: "preview", label: "Preview" },
+	{ id: "stacking", label: "Stacking" },
+	{ id: "install", label: "Install" },
+	{ id: "faq", label: "FAQ" },
+] as const;
+
+type NavSectionId = (typeof NAV_ITEMS)[number]["id"];
+
 export function FloatingNavbar() {
 	const [isVisible, setIsVisible] = useState(false);
+	const [activeId, setActiveId] = useState<NavSectionId | "">("");
 
 	useEffect(() => {
 		const handleScroll = () => {
-			// Reveal navbar once the user scrolls away from the top hero area (~380px)
-			setIsVisible(window.scrollY > 380);
+			const scrollY = window.scrollY;
+			const shouldBeVisible = scrollY > 380;
+			setIsVisible(shouldBeVisible);
+
+			if (!shouldBeVisible) {
+				setActiveId("");
+				return;
+			}
+
+			// Activate the last section if scrolled to the bottom of the page
+			const atBottom =
+				window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+
+			if (atBottom) {
+				setActiveId("faq");
+				return;
+			}
+
+			// Scrollspy trigger offset below the floating navbar (~180px)
+			const targetOffset = 180;
+
+			const passedSections = NAV_ITEMS.filter((item) => {
+				const el = document.getElementById(item.id);
+				if (!el) return false;
+				const rect = el.getBoundingClientRect();
+				return rect.top <= targetOffset;
+			});
+
+			if (passedSections.length > 0) {
+				setActiveId(passedSections[passedSections.length - 1].id);
+			} else {
+				setActiveId("preview");
+			}
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });
@@ -16,6 +57,17 @@ export function FloatingNavbar() {
 
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
+
+	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: NavSectionId) => {
+		if (e.button !== 0 || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+		e.preventDefault();
+		const target = document.getElementById(id);
+		if (target) {
+			setActiveId(id);
+			target.scrollIntoView({ behavior: "smooth" });
+			window.history.pushState(null, "", `#${id}`);
+		}
+	};
 
 	return (
 		<header
@@ -29,30 +81,24 @@ export function FloatingNavbar() {
 			<nav className="flex max-w-[96vw] items-center gap-1 rounded-full border border-white/20 bg-card/85 p-1 pr-1 pl-2.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:gap-1.5 sm:p-1.5 sm:pr-1.5 sm:pl-3.5 dark:border-white/12 dark:bg-[#12100f]/90">
 				{/* Nav Links */}
 				<div className="flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground sm:gap-1 sm:text-xs">
-					<a
-						href="#preview"
-						className="rounded-full px-2 py-1 transition-colors hover:bg-foreground/10 hover:text-foreground sm:px-3 sm:py-1.5"
-					>
-						Preview
-					</a>
-					<a
-						href="#stacking"
-						className="rounded-full px-2 py-1 transition-colors hover:bg-foreground/10 hover:text-foreground sm:px-3 sm:py-1.5"
-					>
-						Stacking
-					</a>
-					<a
-						href="#install"
-						className="rounded-full px-2 py-1 transition-colors hover:bg-foreground/10 hover:text-foreground sm:px-3 sm:py-1.5"
-					>
-						Install
-					</a>
-					<a
-						href="#faq"
-						className="rounded-full px-2 py-1 transition-colors hover:bg-foreground/10 hover:text-foreground sm:px-3 sm:py-1.5"
-					>
-						FAQ
-					</a>
+					{NAV_ITEMS.map((item) => {
+						const isActive = activeId === item.id;
+						return (
+							<a
+								key={item.id}
+								href={`#${item.id}`}
+								onClick={(e) => handleNavClick(e, item.id)}
+								aria-current={isActive ? "page" : undefined}
+								className={`rounded-full px-2.5 py-1 transition-all duration-200 sm:px-3 sm:py-1.5 ${
+									isActive
+										? "bg-primary/15 font-medium text-primary shadow-xs"
+										: "font-medium text-muted-foreground hover:bg-foreground/10 hover:text-foreground"
+								}`}
+							>
+								{item.label}
+							</a>
+						);
+					})}
 				</div>
 
 				<span className="mx-0.5 h-3.5 w-px bg-border/60 sm:mx-1" aria-hidden="true" />

@@ -33,7 +33,7 @@ export function Footer() {
 						</h4>
 						<ul className="space-y-2 text-xs">
 							<li>
-								<a href="#features" className="transition-colors hover:text-foreground">
+								<a href="#preview" className="transition-colors hover:text-foreground">
 									Architecture Specs
 								</a>
 							</li>
