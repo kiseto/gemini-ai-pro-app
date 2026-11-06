@@ -16,6 +16,9 @@ export const APP_INFO = {
 	appUrl: "https://gemini-ai-pro.pages.dev",
 	googleOneUrl: "https://one.google.com/plans",
 	googlePlaySubsUrl: "https://play.google.com/store/account/subscriptions",
+	bmcUrl: "https://buymeacoffee.com/nmrisrl11",
+	devUrl: "https://www.nmrisrl.dev",
+	devGithub: "https://github.com/nmrisrl11",
 } as const;
 
 export const FEATURE_FLAGS = {

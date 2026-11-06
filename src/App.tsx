@@ -5,6 +5,7 @@ import { Hero } from "@/components/landing/hero";
 import { InstallSection } from "@/components/landing/install-section";
 import { PreviewSection } from "@/components/landing/preview-section";
 import { StackingSection } from "@/components/landing/stacking-section";
+import { SupportSection } from "@/components/landing/support-section";
 
 export function App() {
 	return (
@@ -16,6 +17,7 @@ export function App() {
 				<StackingSection />
 				<InstallSection />
 				<FaqSection />
+				<SupportSection />
 			</main>
 			<Footer />
 		</div>
