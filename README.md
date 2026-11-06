@@ -8,7 +8,7 @@ A modern, production-ready React application initialized with the latest ecosyst
 - **Bundler & Dev Server**: [Vite 8](https://vite.dev/)
 - **Language**: [TypeScript 7](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (CSS-first engine with `@theme inline`)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) (using Base UI primitives & Nova preset)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) (using Radix UI primitives & Nova preset)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Typography**: [Geist Font](https://vercel.com/font) (`@fontsource-variable/geist`)
 

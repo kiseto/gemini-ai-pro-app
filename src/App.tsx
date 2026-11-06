@@ -58,7 +58,7 @@ export function App() {
     },
     {
       name: 'shadcn/ui',
-      desc: 'Accessible, customizable components built on modern Base UI primitives',
+      desc: 'Accessible, customizable components built on modern Radix UI primitives',
       badge: 'v4.2',
       icon: Boxes,
       color: 'text-violet-500',
@@ -85,20 +85,16 @@ export function App() {
             >
               {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </Button>
-            <Button
-              variant="default"
-              size="sm"
-              render={
-                <a
-                  href="https://ui.shadcn.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5"
-                >
-                  Docs <ExternalLink className="size-3.5" />
-                </a>
-              }
-            />
+            <Button variant="default" size="sm" asChild>
+              <a
+                href="https://ui.shadcn.com"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5"
+              >
+                Docs <ExternalLink className="size-3.5" />
+              </a>
+            </Button>
           </div>
         </div>
       </header>
