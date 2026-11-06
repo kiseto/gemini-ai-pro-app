@@ -1,12 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark" style="color-scheme: dark; background-color: #12100f">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="dark" />
+		<meta name="theme-color" content="#12100f" />
+
+		<!-- Anti-FOUC & custom scrollbar: guarantee instant dark paint & sleek scrollbar before any CSS or JS loads -->
+		<style>
+			:root,
+			html,
+			body {
+				color-scheme: dark !important;
+				background-color: #12100f !important;
+				color: #f5f5f5 !important;
+			}
+
+			* {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+			}
+
+			::-webkit-scrollbar {
+				width: 7px;
+				height: 7px;
+			}
+
+			::-webkit-scrollbar-track {
+				background: transparent;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: rgba(255, 255, 255, 0.16);
+				border-radius: 9999px;
+				border: 1.5px solid transparent;
+				background-clip: padding-box;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: rgba(245, 158, 11, 0.5);
+			}
+
+			::-webkit-scrollbar-corner {
+				background: transparent;
+			}
+
+			::-webkit-scrollbar-button {
+				display: none;
+				width: 0;
+				height: 0;
+			}
+		</style>
+		<script>
+			document.documentElement.classList.add("dark");
+			document.documentElement.style.colorScheme = "dark";
+		</script>
+
 		<title>Google AI Pro Portal</title>
 	</head>
 	<body
-		class="bg-background font-sans text-foreground antialiased selection:bg-primary/20 selection:text-primary"
+		class="dark bg-background font-sans text-foreground antialiased selection:bg-primary/20 selection:text-primary"
+		style="color-scheme: dark; background-color: #12100f; color: #f5f5f5; margin: 0"
 	>
 		<div id="root"></div>
 		<script type="module" src="./main.tsx"></script>

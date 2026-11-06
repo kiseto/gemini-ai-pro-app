@@ -23,7 +23,7 @@ interface TabItem {
 export default function Popup() {
 	const [activeTabSection, setActiveTabSection] = useState<TabSection>("tiers");
 
-	const { isDark, toggleTheme } = useTheme();
+	useTheme();
 	const { isDevMode, handleVersionClick } = useDeveloperMode();
 	const {
 		selectedLayer,
@@ -76,12 +76,7 @@ export default function Popup() {
 
 	return (
 		<div className="flex w-95 flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/20">
-			<PopupHeader
-				isDark={isDark}
-				onToggleTheme={toggleTheme}
-				onOpenGoogleOne={handleOpenGoogleOne}
-				onVersionClick={handleVersionClick}
-			/>
+			<PopupHeader onOpenGoogleOne={handleOpenGoogleOne} onVersionClick={handleVersionClick} />
 
 			<PopupStatusBanner
 				isMounted={isMounted}

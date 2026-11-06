@@ -50,8 +50,8 @@ export function Hero() {
 
 				{/* [Description]: Refined & purposeful copywriting */}
 				<p className="mt-5 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
-					A free, open-source extension to stack up to 24 months of Google One 5TB AI Premium for
-					$0.00, with real-time checkout protection.
+					A free, open-source extension to stack up to 24 months of Google One 5TB AI Pro for $0.00,
+					with real-time checkout protection.
 				</p>
 
 				{/* [CTA]: White Keeby-style tactile button without icon */}
