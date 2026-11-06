@@ -96,4 +96,3 @@ export function useExtensionSync() {
 		handleReloadPage,
 	};
 }
-

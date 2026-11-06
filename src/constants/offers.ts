@@ -50,7 +50,8 @@ export const OFFER_TIERS: Record<OfferTierId, OfferTierConfig> = {
 		months: 6,
 		tag: "Stacking B",
 		tagVariant: "secondary",
-		description: "Secondary extension layer to stack an additional 6 months (reaching 24 months total).",
+		description:
+			"Secondary extension layer to stack an additional 6 months (reaching 24 months total).",
 		stackingOrder: 3,
 	},
 	"6m_2": {

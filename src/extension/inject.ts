@@ -121,8 +121,7 @@ declare global {
 				statusBadgeElement.removeChild(statusBadgeElement.firstChild);
 			}
 
-			const isDark =
-				window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+			const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 			statusBadgeElement.style.background = isDark
 				? "rgba(24, 24, 27, 0.95)"
 				: "rgba(255, 255, 255, 0.96)";

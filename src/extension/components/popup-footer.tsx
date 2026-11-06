@@ -9,11 +9,10 @@ export function PopupFooter() {
 				href={APP_INFO.githubUrl}
 				target="_blank"
 				rel="noreferrer"
-				className="flex items-center gap-1 hover:text-foreground transition-colors"
+				className="flex items-center gap-1 transition-colors hover:text-foreground"
 			>
 				Docs &amp; Source <ChevronRight className="size-3" />
 			</a>
 		</footer>
 	);
 }
-

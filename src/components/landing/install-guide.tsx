@@ -39,21 +39,13 @@ export function InstallGuide() {
 
 								<div className="flex flex-wrap items-center gap-2">
 									<Button size="lg" asChild className="shrink-0 gap-2 shadow-sm">
-										<a
-											href={APP_INFO.releaseZipUrl}
-											target="_blank"
-											rel="noreferrer noopener"
-										>
+										<a href={APP_INFO.releaseZipUrl} target="_blank" rel="noreferrer noopener">
 											<Download className="size-4" />
 											Download .ZIP
 										</a>
 									</Button>
 									<Button variant="outline" size="lg" asChild className="shrink-0">
-										<a
-											href={APP_INFO.githubReleasesUrl}
-											target="_blank"
-											rel="noreferrer noopener"
-										>
+										<a href={APP_INFO.githubReleasesUrl} target="_blank" rel="noreferrer noopener">
 											All Releases
 										</a>
 									</Button>

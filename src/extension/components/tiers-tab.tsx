@@ -26,16 +26,16 @@ function TierCard({ tier, isSelected, disabled = false, onSelect }: TierCardProp
 			onClick={disabled ? undefined : onSelect}
 			className={`group flex w-full items-start justify-between rounded-lg border p-2.5 text-left transition-all ${
 				disabled
-					? "opacity-50 cursor-not-allowed bg-card/60 border-border/40"
+					? "cursor-not-allowed border-border/40 bg-card/60 opacity-50"
 					: isSelected
-						? "border-primary bg-primary/5 shadow-xs cursor-pointer"
-						: "border-border/60 bg-card hover:border-border hover:bg-muted/30 cursor-pointer"
+						? "cursor-pointer border-primary bg-primary/5 shadow-xs"
+						: "cursor-pointer border-border/60 bg-card hover:border-border hover:bg-muted/30"
 			}`}
 		>
 			<div className="flex w-full items-start gap-2.5">
 				{/* Perfect circular radio button */}
 				<div
-					className={`mt-0.5 flex size-4 shrink-0 aspect-square items-center justify-center rounded-full border transition-all ${
+					className={`mt-0.5 flex aspect-square size-4 shrink-0 items-center justify-center rounded-full border transition-all ${
 						disabled
 							? isSelected
 								? "border-primary/50 bg-primary/50 text-primary-foreground/50"
@@ -56,7 +56,7 @@ function TierCard({ tier, isSelected, disabled = false, onSelect }: TierCardProp
 
 				{/* Tier metadata */}
 				<div className="min-w-0 flex-1">
-					<div className="flex items-center gap-1.5 flex-wrap">
+					<div className="flex flex-wrap items-center gap-1.5">
 						<span
 							className={`text-xs font-semibold ${
 								disabled ? "text-foreground/60" : "text-foreground"
@@ -90,7 +90,7 @@ export function TiersTab({ selectedLayer, disabled = false, onSelectLayer }: Tie
 			<div className="flex items-center justify-between text-[11px] font-medium text-muted-foreground">
 				<span>Select Subscription Tier:</span>
 				{disabled && (
-					<span className="text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+					<span className="text-[10px] font-normal text-amber-600 dark:text-amber-400">
 						Disabled on this site
 					</span>
 				)}
@@ -127,4 +127,3 @@ export function TiersTab({ selectedLayer, disabled = false, onSelectLayer }: Tie
 		</div>
 	);
 }
-

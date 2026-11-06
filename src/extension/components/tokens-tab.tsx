@@ -49,7 +49,7 @@ export function TokensTab({
 					<div className="flex items-center gap-1.5">
 						<h3 className="font-semibold text-foreground">Promotional Tokens</h3>
 						{disabled && (
-							<span className="text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+							<span className="text-[10px] font-normal text-amber-600 dark:text-amber-400">
 								(Read Only)
 							</span>
 						)}
@@ -106,7 +106,7 @@ export function TokensTab({
 								value={value}
 								disabled={disabled}
 								onChange={(e) => onTokenChange(key, e.target.value.trim())}
-								className="mt-1 w-full rounded-md border border-border bg-card px-2 py-1 font-mono text-[10px] text-foreground disabled:opacity-50 disabled:cursor-not-allowed"
+								className="mt-1 w-full rounded-md border border-border bg-card px-2 py-1 font-mono text-[10px] text-foreground disabled:cursor-not-allowed disabled:opacity-50"
 							/>
 						</div>
 					);
@@ -137,4 +137,3 @@ export function TokensTab({
 		</div>
 	);
 }
-

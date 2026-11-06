@@ -44,4 +44,3 @@ export function useDeveloperMode() {
 
 	return { isDevMode, handleVersionClick };
 }
-

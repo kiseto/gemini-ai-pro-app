@@ -11,7 +11,7 @@
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3-38bdf8.svg?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Manifest V3](https://img.shields.io/badge/Chrome_Extension-Manifest_V3-4285F4.svg?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
-[![Zero Telemetry](https://img.shields.io/badge/Telemetry-Zero_%2F_Client--Side-brightgreen.svg)]()
+[![Zero Telemetry](https://img.shields.io/badge/Telemetry-Zero_%2F_Client--Side-brightgreen.svg)](<>)
 
 [Features](#-key-features) • [Architecture](#-architecture--blueprint) • [How It Works](#-how-it-works-under-the-hood) • [Stacking Guide](#-multi-tier-stacking) • [Installation](#-how-to-install-the-extension) • [Tech Stack](#-tech-stack) • [Development](#-development--scripts)
 
@@ -22,6 +22,7 @@
 ## 📖 What is Google AI Pro Portal?
 
 **Google AI Pro Portal** is a dual-target project providing:
+
 1. **A modern, high-performance web landing page**: Featuring an interactive live simulator, 4-tier stacking visualizer, step-by-step tutorial, FAQ accordion, and release download links.
 2. **A Manifest V3 browser extension**: An intelligent client-side utility that mounts on `https://one.google.com/plans`. It intercepts checkout requests to inject promotional offer tokens for the **Google One 2TB AI Premium** plan and provides an automated **Price Safety Guard** inside Google Play iframes to guarantee users never confirm an unexpected paid charge.
 
@@ -30,14 +31,17 @@
 ## 🎯 Key Features
 
 - **⚡ One-Click Promotional Tier Injection**: Instantly activate eligible promotional tokens for **Tier 1 (12 Months)**, **Tier 2 (6 Months SS)**, **Tier 3 (6 Months)**, and **Tier 4 (6 Months Backup)**, with optional YouTube Premium add-on token support.
-- **🛡️ Google Play Checkout Safety Guard**: Inspects live checkout terms inside `tokenized.play.google.com` iframes. Renders high-visibility floating status alerts:
-  - 🟢 **Safe ($0.00 Trial)**: Confirms genuine zero-charge trial status.
+- **🛡️ Google Play Checkout Safety Guard**: Inspects live checkout terms inside `tokenized.play.google.com` iframes. Built with declarative Lucide iconography, strict TrustedTypes-compliant DOM creation, and smooth dismissal animations:
+  - 🟢 **Safe ($0.00 Trial)**: Confirms genuine zero-charge trial status with badge and date details.
   - 🔴 **Danger (Unexpected Charge)**: Warns immediately if a monthly/annual charge is detected so you never confirm an unexpected billing.
   - 🟡 **Warning / Inspecting**: Advises manual review if conflicting terms appear.
+- **📍 Connected Timeline Workflow Guide**: An intuitive connected vertical stepper in the Guide tab showing the end-to-end 7-step activation and stacking sequence.
+- **🌐 Domain-Aware Context Protection**: Automatically detects active tabs. Disables tier toggling and renders a guided alert with a one-click redirect button whenever browsing outside `one.google.com`.
+- **🕵️ Stealth Developer Mode**: Keeps the UI clean and distraction-free. The advanced **Tokens** configuration tab is hidden by default and unlocked via a 5-click easter egg on the version badge in the popup header.
 - **🔄 Multi-Tier Promotional Stacking**: Visualizes and guides consecutive stacking sequences (e.g. 12M initial + 6M renewal + 6M extension) allowing eligible accounts to unlock extended promotional benefits.
 - **🎨 Modern React 19 + Tailwind CSS v4 UI**: Built using Radix UI primitives and styled with Tailwind v4 CSS-first theming. Supports automatic system dark/light mode synchronization.
 - **🔒 Zero-Telemetry & Client-Side Privacy**: Runs 100% locally in your browser. No external API servers, no telemetry, no analytics, and zero tracking.
-- **⚙️ Configurable Token Overrides**: All tokens can be overridden directly in the extension popup's **Settings** tab and stored locally in `chrome.storage.local`.
+- **⚙️ Configurable Token Overrides**: All tokens can be overridden live in the unlocked **Tokens** tab and stored locally in `chrome.storage.local`.
 - **📦 Clean Dual-Build Pipeline**: Single unified monorepo leveraging Vite 8 and `vite-plugin-web-extension` to build both the static web landing page (`dist/`) and the unpackable extension (`dist-ext/`).
 
 ---
@@ -59,6 +63,7 @@ Google AI Pro Portal bridges the architectural foundation of [sulok](https://git
 ```
 
 ### Upstream Blueprint Improvements:
+
 - **100% TypeScript**: Fully typed messaging contracts (`types.ts`), strict compiler settings, and runtime message discriminators.
 - **English UX Copywriting**: Clean, professional naming conventions, docstrings, and UI copywriting throughout.
 - **Strict Separation of Concerns**: Static metadata lives in `src/constants/app-info.ts` (single source of truth); sensitive tokens are externalized into `.env` or input via `chrome.storage.local`.
@@ -100,29 +105,29 @@ The extension coordinates three distinct execution contexts in compliance with C
 
 Google One allows promotional offer stacking across eligible billing transitions. The portal guides users through consecutive tiers:
 
-| Tier | Duration | Type | Recommended Order | Description |
-| :--- | :---: | :---: | :---: | :--- |
-| **Tier 1** | **12 Months** | Introductory | 1st Activation | Initial 1-year promotional offer for new or reset subscribers. |
-| **Tier 2** | **6 Months (SS)** | Stacking A | 2nd Activation | Applied while Tier 1 is active to stack an additional 6 months. |
-| **Tier 3** | **6 Months** | Stacking B | 3rd Activation | Secondary extension stacking an additional 6 months (totaling 24M). |
-| **Tier 4** | **6 Months (Alt)**| Alternate | Fallback | Backup promotional token if Tier 2 or Tier 3 encounters eligibility errors. |
-| **Off** | **0 Months** | Bypass | Standard | Standard Google One checkout without promotional injection. |
+| Tier       |      Duration      |     Type     | Recommended Order | Description                                                                 |
+| :--------- | :----------------: | :----------: | :---------------: | :-------------------------------------------------------------------------- |
+| **Tier 1** |   **12 Months**    | Introductory |  1st Activation   | Initial 1-year promotional offer for new or reset subscribers.              |
+| **Tier 2** | **6 Months (SS)**  |  Stacking A  |  2nd Activation   | Applied while Tier 1 is active to stack an additional 6 months.             |
+| **Tier 3** |    **6 Months**    |  Stacking B  |  3rd Activation   | Secondary extension stacking an additional 6 months (totaling 24M).         |
+| **Tier 4** | **6 Months (Alt)** |  Alternate   |     Fallback      | Backup promotional token if Tier 2 or Tier 3 encounters eligibility errors. |
+| **Off**    |    **0 Months**    |    Bypass    |     Standard      | Standard Google One checkout without promotional injection.                 |
 
 ---
 
 ## 💻 Tech Stack
 
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Frontend Framework** | [React 19](https://react.dev/) | Component architecture for both landing page & extension popup |
-| **Bundler & Build Tool** | [Vite 8](https://vite.dev/) | Blazing-fast compilation, HMR, and sub-build orchestration |
-| **Extension Tooling** | [vite-plugin-web-extension](https://github.com/aklinker1/vite-plugin-web-extension) | Manifest V3 bundling, multi-world scripting, and asset output |
-| **Language** | [TypeScript 5](https://www.typescriptlang.org/) | End-to-end type safety, interfaces, and discriminated unions |
-| **CSS Engine** | [Tailwind CSS v4](https://tailwindcss.com/) | Next-generation CSS-first engine with `@theme` token system |
-| **UI Primitives** | [Radix UI](https://www.radix-ui.com/) | Accessible component primitives (`@radix-ui/react-slot`, dialogs, tabs) |
-| **Design System** | [shadcn/ui](https://ui.shadcn.com/) | Clean, accessible components with customizable variant styling |
-| **Linter & Formatter** | [OXC](https://oxc.rs/) (`oxlint` & `oxfmt`) | High-speed Rust-based code verification with Tailwind class sorting |
-| **Typography & Icons** | [Geist Font](https://vercel.com/font) + [Lucide](https://lucide.dev/) | Clean typography and consistent iconography |
+| Layer                    | Technology                                                                          | Purpose                                                                 |
+| :----------------------- | :---------------------------------------------------------------------------------- | :---------------------------------------------------------------------- |
+| **Frontend Framework**   | [React 19](https://react.dev/)                                                      | Component architecture for both landing page & extension popup          |
+| **Bundler & Build Tool** | [Vite 8](https://vite.dev/)                                                         | Blazing-fast compilation, HMR, and sub-build orchestration              |
+| **Extension Tooling**    | [vite-plugin-web-extension](https://github.com/aklinker1/vite-plugin-web-extension) | Manifest V3 bundling, multi-world scripting, and asset output           |
+| **Language**             | [TypeScript 5](https://www.typescriptlang.org/)                                     | End-to-end type safety, interfaces, and discriminated unions            |
+| **CSS Engine**           | [Tailwind CSS v4](https://tailwindcss.com/)                                         | Next-generation CSS-first engine with `@theme` token system             |
+| **UI Primitives**        | [Radix UI](https://www.radix-ui.com/)                                               | Accessible component primitives (`@radix-ui/react-slot`, dialogs, tabs) |
+| **Design System**        | [shadcn/ui](https://ui.shadcn.com/)                                                 | Clean, accessible components with customizable variant styling          |
+| **Linter & Formatter**   | [OXC](https://oxc.rs/) (`oxlint` & `oxfmt`)                                         | High-speed Rust-based code verification with Tailwind class sorting     |
+| **Typography & Icons**   | [Geist Font](https://vercel.com/font) + [Lucide](https://lucide.dev/)               | Clean typography and consistent iconography                             |
 
 ---
 
@@ -154,10 +159,22 @@ gemini-ai-pro-app/
 │   │       ├── faq-section.tsx     # Frequently asked questions accordion
 │   │       └── footer.tsx          # Brand footer with quick navigation links
 │   └── extension/                  # Manifest V3 Extension Source
+│       ├── components/             # Modular Popup UI Components
+│       │   ├── guide-tab.tsx       # Connected timeline 7-step guide
+│       │   ├── popup-footer.tsx    # Footer with Play Subs & source links
+│       │   ├── popup-header.tsx    # Header with theme toggle & stealth dev trigger
+│       │   ├── popup-status-banner.tsx # Domain-aware status advisory banner
+│       │   ├── tiers-tab.tsx       # Tier selection cards with status indicators
+│       │   └── tokens-tab.tsx      # Stealth developer token overrides tab
+│       ├── hooks/                  # Custom React Hooks for Extension State
+│       │   ├── use-custom-tokens.ts # Token override loading, validation & storage
+│       │   ├── use-developer-mode.ts # 5-click easter egg detector
+│       │   ├── use-extension-sync.ts # Chrome tab status & content-script bridge
+│       │   └── use-theme.ts        # Dark/light theme sync with document class
 │       ├── manifest.json           # Manifest V3 specification
 │       ├── popup.html              # Popup container HTML
 │       ├── main.tsx                # React DOM mount for extension popup
-│       ├── popup.tsx               # Popup UI (Tiers Selector, 7-Step Guide, Token Settings)
+│       ├── popup.tsx               # Orchestrator popup view composing components & hooks
 │       ├── content.ts              # Isolated-world content script (storage bridge)
 │       ├── inject.ts               # MAIN-world interceptor (XHR / URL rewrite + status pill)
 │       ├── play-guard.ts           # Google Play checkout safety guard (tokenized.play.google.com)
@@ -179,15 +196,18 @@ gemini-ai-pro-app/
 ## ⚙️ Configuration & Environment Variables
 
 ### Single Source of Truth:
+
 - **Application Metadata**: [`src/constants/app-info.ts`](file:///src/constants/app-info.ts) is the sole source of truth for app name, version, URLs, and descriptions.
 - **Sensitive Tokens**: [`.env`](file:///src/.env) is reserved **exclusively** for promotional offer tokens.
 
 Create your local `.env` by copying `.env.example`:
+
 ```bash
 cp .env.example .env
 ```
 
 Contents of `.env`:
+
 ```bash
 # Promotional Offer Tokens (Base64 Encoded Payloads)
 # Configure your private promotional tokens below:
@@ -199,13 +219,14 @@ VITE_OFFER_TOKEN_YT_PREMIUM="your_youtube_premium_addon_token_here"
 ```
 
 > [!TIP]
-> Tokens can also be edited or overridden live at any time without rebuilding by navigating to the **Settings** tab in the extension popup.
+> Tokens can also be edited or overridden live at any time without rebuilding by unlocking the stealth **Tokens** tab (click the version badge in the popup header 5 times) and saving directly to `chrome.storage.local`.
 
 ---
 
 ## 🚀 How to Install the Extension
 
 ### Method 1: Load Unpacked from Source (Recommended for Developers)
+
 1. Clone the repository and install dependencies:
    ```bash
    npm install
@@ -220,6 +241,7 @@ VITE_OFFER_TOKEN_YT_PREMIUM="your_youtube_premium_addon_token_here"
 6. Select the **`dist-ext`** folder generated in this repository.
 
 ### Method 2: Install from Pre-Packaged Release ZIP
+
 1. Download `google-ai-pro-portal-v1.0.0.zip` from [Releases](https://github.com/nmrisrl11/gemini-ai-pro-app/releases) or build it locally with:
    ```bash
    npm run pack:ext
@@ -231,17 +253,17 @@ VITE_OFFER_TOKEN_YT_PREMIUM="your_youtube_premium_addon_token_here"
 
 ## 🛠️ Development & Scripts
 
-| Command | Action | Output / Description |
-| :--- | :--- | :--- |
-| `npm run dev` | Start web development server | Runs landing page on `http://localhost:5173` with HMR |
-| `npm run dev:ext` | Watch-mode extension build | Watches and builds extension changes into `dist-ext/` |
-| `npm run build` | Full landing page build | Type-checks (`tsc -b`), lints (`oxlint`), and bundles to `dist/` |
-| `npm run build:ext` | Production extension build | Bundles all Manifest V3 entrypoints into `dist-ext/` |
-| `npm run pack:ext` | Build & zip extension | Builds extension and generates `releases/google-ai-pro-portal-v*.zip` |
-| `npm run lint` | Run linter | Fast Rust-based linting via `oxlint` (0 warnings policy) |
-| `npm run format` | Format codebase | Formats TypeScript, HTML, and CSS with `oxfmt` |
-| `npm run format:check` | Check code formatting | Verifies formatting compliance across all files |
-| `npm run preview` | Preview production build | Serves the production `dist/` bundle locally |
+| Command                | Action                       | Output / Description                                                  |
+| :--------------------- | :--------------------------- | :-------------------------------------------------------------------- |
+| `npm run dev`          | Start web development server | Runs landing page on `http://localhost:5173` with HMR                 |
+| `npm run dev:ext`      | Watch-mode extension build   | Watches and builds extension changes into `dist-ext/`                 |
+| `npm run build`        | Full landing page build      | Type-checks (`tsc -b`), lints (`oxlint`), and bundles to `dist/`      |
+| `npm run build:ext`    | Production extension build   | Bundles all Manifest V3 entrypoints into `dist-ext/`                  |
+| `npm run pack:ext`     | Build & zip extension        | Builds extension and generates `releases/google-ai-pro-portal-v*.zip` |
+| `npm run lint`         | Run linter                   | Fast Rust-based linting via `oxlint` (0 warnings policy)              |
+| `npm run format`       | Format codebase              | Formats TypeScript, HTML, and CSS with `oxfmt`                        |
+| `npm run format:check` | Check code formatting        | Verifies formatting compliance across all files                       |
+| `npm run preview`      | Preview production build     | Serves the production `dist/` bundle locally                          |
 
 ---
 

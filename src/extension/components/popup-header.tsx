@@ -26,7 +26,7 @@ export function PopupHeader({
 						<Badge
 							variant="outline"
 							onClick={onVersionClick}
-							className="cursor-default select-none px-1 py-0 text-[10px] font-medium"
+							className="cursor-default px-1 py-0 text-[10px] font-medium select-none"
 						>
 							v{APP_INFO.version}
 						</Badge>
