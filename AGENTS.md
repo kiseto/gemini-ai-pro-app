@@ -1,4 +1,4 @@
-# AGENT.md — Developer & AI Agent Context Guide
+# AGENTS.md — Developer & AI Agent Context Guide
 
 > **Authoritative specification, architectural rules, message workflows, and coding constraints for Google AI Pro Portal.**
 > All human developers and AI agents working in this repository MUST consult and adhere to this document.
@@ -203,7 +203,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
-├── AGENT.md                        # This agent specification document
+├── AGENTS.md                       # This agent specification document
 ├── README.md                       # Public product documentation
 └── package.json                    # Project dependencies and npm scripts
 ```

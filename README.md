@@ -170,6 +170,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
+├── AGENTS.md                       # Comprehensive guide for AI agents and developers
 └── package.json                    # Project scripts and dependencies
 ```
 
