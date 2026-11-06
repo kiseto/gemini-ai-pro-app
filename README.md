@@ -70,15 +70,9 @@ gemini-ai-pro-app/
 
 ## Environment Variables
 
-All promotional tokens are defined in `.env` (copy from `.env.example`):
+Promotional offer tokens are defined in `.env` (copy from `.env.example`). Static application metadata is maintained in `src/constants/app-info.ts`.
 
 ```bash
-# Public Application Metadata
-VITE_APP_NAME="Google AI Pro Portal"
-VITE_APP_SHORT_NAME="AI Pro Portal"
-VITE_APP_URL="https://gemini-ai-pro.pages.dev"
-VITE_APP_VERSION="1.0.0"
-
 # Promotional Offer Tokens (Base64 Payloads)
 # Configure these in your private .env file
 VITE_OFFER_TOKEN_12M="your_tier_1_12m_offer_token_here"
