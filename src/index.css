@@ -2,12 +2,17 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-	--font-heading: var(--font-sans);
-	--font-sans: "Geist Variable", sans-serif;
+	--font-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--font-heading:
+		"Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--font-mono:
+		"Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,6 +44,11 @@
 	--color-card: var(--card);
 	--color-foreground: var(--foreground);
 	--color-background: var(--background);
+
+	--color-brand-amber: var(--brand-amber);
+	--color-brand-orange: var(--brand-orange);
+	--color-brand-espresso: var(--brand-espresso);
+
 	--radius-sm: calc(var(--radius) * 0.6);
 	--radius-md: calc(var(--radius) * 0.8);
 	--radius-lg: var(--radius);
@@ -48,73 +58,129 @@
 	--radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* 
+ * Warm Solar Amber & Espresso Brand Palette 
+ * Derived directly from the Google AI Pro Portal logo icon 
+ */
 :root {
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-	--chart-1: oklch(0.87 0 0);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
-	--radius: 0.625rem;
-	--sidebar: oklch(0.985 0 0);
-	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.205 0 0);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.97 0 0);
-	--sidebar-accent-foreground: oklch(0.205 0 0);
-	--sidebar-border: oklch(0.922 0 0);
-	--sidebar-ring: oklch(0.708 0 0);
+	--background: oklch(0.985 0.005 60); /* Warm Alabaster Porcelain */
+	--foreground: oklch(0.18 0.02 45); /* Deep Roasted Espresso */
+	--card: oklch(1 0 0); /* Pure Crisp White */
+	--card-foreground: oklch(0.18 0.02 45);
+	--popover: oklch(0.97 0.008 60);
+	--popover-foreground: oklch(0.18 0.02 45);
+
+	/* Warm Solar Amber Brand Accent */
+	--primary: oklch(0.62 0.18 50); /* Warm Amber Flame */
+	--primary-foreground: oklch(0.99 0 0);
+
+	--secondary: oklch(0.95 0.01 60);
+	--secondary-foreground: oklch(0.25 0.02 45);
+
+	--muted: oklch(0.95 0.008 60);
+	--muted-foreground: oklch(0.5 0.015 45);
+
+	--accent: oklch(0.94 0.015 55);
+	--accent-foreground: oklch(0.2 0.02 45);
+
+	--destructive: oklch(0.58 0.22 28);
+	--border: oklch(0.89 0.01 60); /* Hairline Champagne Border */
+	--input: oklch(0.89 0.01 60);
+	--ring: oklch(0.62 0.18 50);
+
+	--brand-amber: #f59e0b;
+	--brand-orange: #ea580c;
+	--brand-espresso: #2d2220;
+
+	--chart-1: oklch(0.62 0.18 50);
+	--chart-2: oklch(0.55 0.15 40);
+	--chart-3: oklch(0.7 0.12 75);
+	--chart-4: oklch(0.4 0.08 45);
+	--chart-5: oklch(0.3 0.04 45);
+
+	--radius: 0.75rem;
+
+	--sidebar: oklch(0.98 0.006 60);
+	--sidebar-foreground: oklch(0.18 0.02 45);
+	--sidebar-primary: oklch(0.62 0.18 50);
+	--sidebar-primary-foreground: oklch(0.99 0 0);
+	--sidebar-accent: oklch(0.95 0.01 60);
+	--sidebar-accent-foreground: oklch(0.18 0.02 45);
+	--sidebar-border: oklch(0.89 0.01 60);
+	--sidebar-ring: oklch(0.62 0.18 50);
 }
 
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.205 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.205 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.922 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
-	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.556 0 0);
-	--chart-1: oklch(0.87 0 0);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.556 0 0);
+	--background: oklch(0.125 0.012 45); /* Velvet Espresso-Obsidian (#12100f) */
+	--foreground: oklch(0.97 0.005 60); /* Soft Warm White */
+	--card: oklch(0.165 0.015 45); /* Deep Espresso Slate (#1a1716) */
+	--card-foreground: oklch(0.97 0.005 60);
+	--popover: oklch(0.19 0.018 45);
+	--popover-foreground: oklch(0.97 0.005 60);
+
+	/* Radiant Amber Sunburst Core */
+	--primary: oklch(0.74 0.18 55); /* Radiant Amber Gold (#f59e0b) */
+	--primary-foreground: oklch(0.14 0.02 45);
+
+	--secondary: oklch(0.22 0.018 45);
+	--secondary-foreground: oklch(0.96 0.008 60);
+
+	--muted: oklch(0.2 0.015 45);
+	--muted-foreground: oklch(0.68 0.015 50); /* Pewter Sand (#a89f9a) */
+
+	--accent: oklch(0.24 0.022 50);
+	--accent-foreground: oklch(0.97 0.005 60);
+
+	--destructive: oklch(0.62 0.22 26);
+	--border: oklch(0.26 0.016 45 / 0.8); /* Hairline Warm Graphite Border */
+	--input: oklch(0.26 0.016 45);
+	--ring: oklch(0.74 0.18 55 / 0.6);
+
+	--brand-amber: #fbbf24;
+	--brand-orange: #f97316;
+	--brand-espresso: #14100f;
+
+	--chart-1: oklch(0.74 0.18 55);
+	--chart-2: oklch(0.65 0.15 45);
+	--chart-3: oklch(0.78 0.14 75);
+	--chart-4: oklch(0.48 0.06 45);
+	--chart-5: oklch(0.35 0.04 45);
+
+	--sidebar: oklch(0.14 0.014 45);
+	--sidebar-foreground: oklch(0.97 0.005 60);
+	--sidebar-primary: oklch(0.74 0.18 55);
+	--sidebar-primary-foreground: oklch(0.14 0.02 45);
+	--sidebar-accent: oklch(0.22 0.018 45);
+	--sidebar-accent-foreground: oklch(0.97 0.005 60);
+	--sidebar-border: oklch(0.26 0.016 45 / 0.8);
+	--sidebar-ring: oklch(0.74 0.18 55 / 0.6);
+}
+
+/* Custom subtle scrollbar & utility classes */
+@layer base {
+	* {
+		border-color: var(--border);
+	}
+	body {
+		background-color: var(--background);
+		color: var(--foreground);
+		font-feature-settings: "cv01", "cv02", "cv03", "tnum";
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+/* Subtle glow utility without AI-slop neon blobs */
+.amber-glow {
+	background: radial-gradient(
+		circle at 50% 50%,
+		rgba(245, 158, 11, 0.08) 0%,
+		rgba(245, 158, 11, 0) 70%
+	);
+}
+
+.amber-hairline {
+	box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.18);
 }
 
 @layer base {

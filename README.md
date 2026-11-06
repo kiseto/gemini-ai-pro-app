@@ -4,7 +4,7 @@
 
 ![Google AI Pro Portal Banner](/public/icons/128.png)
 
-**An intelligent client-side browser extension and companion web portal for Google One 2TB AI Premium promotional subscriptions.**
+**An intelligent client-side browser extension and companion web portal for Google One 5TB AI Premium promotional subscriptions.**
 
 [![React 19](https://img.shields.io/badge/React-19.3-61dafb.svg?logo=react&logoColor=black)](https://react.dev/)
 [![Vite 8](https://img.shields.io/badge/Vite-8.3-646cff.svg?logo=vite&logoColor=white)](https://vite.dev/)
@@ -24,7 +24,7 @@
 **Google AI Pro Portal** is a dual-target project providing:
 
 1. **A modern, high-performance web landing page**: Featuring an interactive live simulator, 4-tier stacking visualizer, step-by-step tutorial, FAQ accordion, and release download links.
-2. **A Manifest V3 browser extension**: An intelligent client-side utility that mounts on `https://one.google.com/plans`. It intercepts checkout requests to inject promotional offer tokens for the **Google One 2TB AI Premium** plan and provides an automated **Price Safety Guard** inside Google Play iframes to guarantee users never confirm an unexpected paid charge.
+2. **A Manifest V3 browser extension**: An intelligent client-side utility that mounts on `https://one.google.com/plans`. It intercepts checkout requests to inject promotional offer tokens for the **Google One 5TB AI Premium** plan and provides an automated **Price Safety Guard** inside Google Play iframes to guarantee users never confirm an unexpected paid charge.
 
 ---
 

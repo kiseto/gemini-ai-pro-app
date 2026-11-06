@@ -5,7 +5,7 @@ export const APP_INFO = {
 	tagline: "Smart Subscription & Offer Injector for Google AI Pro",
 	title: "Google AI Pro Portal — Streamline & Verify Google AI Pro Benefits",
 	description:
-		"An intelligent, client-side browser extension and companion tool that injects promotional offer tokens and guards your checkout for Google One 2TB AI Premium tier.",
+		"An intelligent, client-side browser extension and companion tool that injects promotional offer tokens and guards your checkout for Google One 5TB AI Premium tier.",
 	shortDescription:
 		"Inject eligible promotional offer tokens with real-time $0.00 checkout protection.",
 	author: "Antigravity Engineering",

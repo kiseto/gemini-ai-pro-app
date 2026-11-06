@@ -11,7 +11,7 @@ import type { CustomTokensMap, ExtensionState, WindowBridgeMessage } from "./typ
  *
  * Runs directly in the MAIN page execution context of one.google.com.
  * Intercepts Google One subscription checkout requests and replaces offer tokens
- * with specified promo tokens for Google One 2TB AI Premium tier.
+ * with specified promo tokens for Google One 5TB AI Premium tier.
  */
 
 declare global {
