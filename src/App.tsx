@@ -1,3 +1,4 @@
+import { DownloadSection } from "@/components/landing/download-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { FloatingNavbar } from "@/components/landing/floating-navbar";
 import { Footer } from "@/components/landing/footer";
@@ -18,6 +19,7 @@ export function App() {
 				<InstallSection />
 				<FaqSection />
 				<SupportSection />
+				<DownloadSection />
 			</main>
 			<Footer />
 		</div>
