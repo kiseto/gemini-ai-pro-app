@@ -1,0 +1,108 @@
+import type { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
+
+interface GuideTabProps {
+	onOpenPlaySubs: () => void;
+}
+
+interface GuideStep {
+	step: number;
+	content: ReactNode;
+}
+
+const GUIDE_STEPS: GuideStep[] = [
+	{
+		step: 1,
+		content: (
+			<>
+				Open <b className="text-foreground">one.google.com/plans</b> and ensure your Google account
+				region is set to the US (use a US payment method/ZIP like{" "}
+				<b className="text-foreground">97201</b>).
+			</>
+		),
+	},
+	{
+		step: 2,
+		content: (
+			<>
+				Select <b className="text-foreground">Tier 1 · 12 Months</b> in the Tiers tab, then refresh
+				the Google One page.
+			</>
+		),
+	},
+	{
+		step: 3,
+		content: (
+			<>
+				Confirm the floating pill in the bottom right corner displays &ldquo;Offer Mounted&rdquo;.
+			</>
+		),
+	},
+	{
+		step: 4,
+		content: (
+			<>
+				Click <b className="text-foreground">Get discount</b> on the Google One AI Premium card.
+			</>
+		),
+	},
+	{
+		step: 5,
+		content: (
+			<>
+				Look at the top of the Google Play checkout popup: Verify the{" "}
+				<b className="text-emerald-600 dark:text-emerald-400">Green Banner ($0.00)</b> is visible.
+				If red, cancel immediately!
+			</>
+		),
+	},
+	{
+		step: 6,
+		content: (
+			<>
+				<b className="text-foreground">Stacking 2 Years:</b> After Tier 1 is active, switch to Tier
+				2 (Stack 1) &rarr; refresh &rarr; repeat checkout. Then switch to Tier 3.
+			</>
+		),
+	},
+	{
+		step: 7,
+		content: (
+			<>
+				Visit Google Play Subscriptions to disable auto-renew so you are never charged at the
+				conclusion of the promo period.
+			</>
+		),
+	},
+];
+
+export function GuideTab({ onOpenPlaySubs }: GuideTabProps) {
+	return (
+		<div className="space-y-2.5 p-3 text-xs">
+			<div className="rounded-lg border border-border/60 bg-card p-3">
+				<h3 className="font-semibold text-foreground">Step-by-Step Instructions</h3>
+				<ol className="mt-2 space-y-2 text-[11.5px] text-muted-foreground">
+					{GUIDE_STEPS.map(({ step, content }) => (
+						<li key={step} className="flex gap-2">
+							<span className="flex size-4.5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+								{step}
+							</span>
+							<span>{content}</span>
+						</li>
+					))}
+				</ol>
+			</div>
+
+			<Button
+				variant="outline"
+				size="sm"
+				onClick={onOpenPlaySubs}
+				className="w-full text-xs"
+			>
+				Manage Play Subscriptions <ExternalLink className="ml-1.5 size-3" />
+			</Button>
+		</div>
+	);
+}
+

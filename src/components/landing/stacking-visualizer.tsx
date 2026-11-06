@@ -71,7 +71,7 @@ export function StackingVisualizer() {
 								</span>
 							</div>
 
-							<h3 className="mt-4 text-xl font-bold text-foreground">Tier 2: +6 Months (SS)</h3>
+							<h3 className="mt-4 text-xl font-bold text-foreground">Tier 2: +6 Months (Stack 1)</h3>
 							<p className="mt-2 text-xs leading-relaxed text-muted-foreground">
 								Switch to Tier 2 in the popup, refresh the plans page, and repeat checkout. The
 								subscription expiration extends by 6 additional months.

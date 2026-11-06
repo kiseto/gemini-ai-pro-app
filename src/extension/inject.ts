@@ -172,8 +172,8 @@ declare global {
 			const tierLabels: Record<OfferTierId, string> = {
 				off: "Disabled",
 				"12m": "Tier 1 (12 Months)",
-				"6m_ss": "Tier 2 (6M Stacking)",
-				"6m": "Tier 3 (6M Stacking)",
+				"6m_ss": "Tier 2 (6M Stack 1)",
+				"6m": "Tier 3 (6M Stack 2)",
 				"6m_2": "Tier 4 (6M Backup)",
 			};
 			const label = tierLabels[activeConfig.layer] || activeConfig.layer;
