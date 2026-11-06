@@ -54,7 +54,7 @@ export function Hero() {
 					with real-time checkout protection.
 				</p>
 
-				{/* [CTA]: White Keeby-style tactile button without icon */}
+				{/* [CTA]: White tactile button without icon */}
 				<div className="mt-9 flex items-center justify-center">
 					<a
 						href={APP_INFO.releaseZipUrl}

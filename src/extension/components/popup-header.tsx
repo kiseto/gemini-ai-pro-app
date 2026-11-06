@@ -12,7 +12,7 @@ export function PopupHeader({ onOpenGoogleOne, onVersionClick }: PopupHeaderProp
 	return (
 		<header className="flex items-center justify-between border-b border-border/60 bg-card/60 px-4 py-3 backdrop-blur-sm">
 			<div className="flex items-center gap-2.5">
-				<img src="/icons/32.png" alt={APP_INFO.shortName} className="size-7 object-contain" />
+				<img src="/icons/128.png" alt={APP_INFO.shortName} className="size-7 object-contain" />
 				<div>
 					<div className="flex items-center gap-1.5">
 						<h1 className="text-sm font-semibold tracking-tight">{APP_INFO.name}</h1>

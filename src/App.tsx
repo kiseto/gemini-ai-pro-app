@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FloatingNavbar } from "@/components/landing/floating-navbar";
 import { Hero } from "@/components/landing/hero";
-import { KeebyShowcase } from "@/components/landing/keeby-showcase";
+import { ExtensionPreview } from "@/components/landing/extension-preview";
 import { StickyCardStack } from "@/components/landing/sticky-card-stack";
 import { InstallGuide } from "@/components/landing/install-guide";
 import { FaqSection } from "@/components/landing/faq-section";
@@ -17,7 +17,7 @@ export function App() {
 			<FloatingNavbar />
 			<main>
 				<Hero />
-				<KeebyShowcase />
+				<ExtensionPreview />
 				<StickyCardStack />
 				<InstallGuide />
 				<FaqSection />

@@ -30,10 +30,10 @@ export function FloatingNavbar() {
 				{/* Nav Links */}
 				<div className="flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground sm:gap-1 sm:text-xs">
 					<a
-						href="#features"
+						href="#preview"
 						className="rounded-full px-2 py-1 transition-colors hover:bg-foreground/10 hover:text-foreground sm:px-3 sm:py-1.5"
 					>
-						Specs
+						Preview
 					</a>
 					<a
 						href="#stacking"
@@ -68,7 +68,7 @@ export function FloatingNavbar() {
 					<GithubIcon className="size-3.5" />
 				</a>
 
-				{/* CTA Button: Proportional, vertically centered white Keeby-style button */}
+				{/* CTA Button: Proportional, vertically centered white button */}
 				<a
 					href={APP_INFO.releaseZipUrl}
 					target="_blank"
