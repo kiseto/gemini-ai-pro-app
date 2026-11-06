@@ -17,3 +17,11 @@ export const APP_INFO = {
 	googleOneUrl: "https://one.google.com/plans",
 	googlePlaySubsUrl: "https://play.google.com/store/account/subscriptions",
 } as const;
+
+export const FEATURE_FLAGS = {
+	/**
+	 * When false, the Tokens tab is hidden by default.
+	 * Can be toggled on at runtime by tapping the version badge in the popup header 5 times.
+	 */
+	showTokensTab: false,
+} as const;

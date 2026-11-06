@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { SUBSCRIPTION_CONSTANTS, type OfferTierId } from "@/constants/offers";
+import { useState, useMemo } from "react";
 import { APP_INFO } from "@/constants/app-info";
-import type { ExtensionState, CustomTokensMap } from "./types";
 import { Layers, BookOpen, Settings2 } from "lucide-react";
 import { PopupHeader } from "./components/popup-header";
 import { PopupStatusBanner } from "./components/popup-status-banner";
@@ -9,6 +7,10 @@ import { TiersTab } from "./components/tiers-tab";
 import { GuideTab } from "./components/guide-tab";
 import { TokensTab } from "./components/tokens-tab";
 import { PopupFooter } from "./components/popup-footer";
+import { useTheme } from "./hooks/use-theme";
+import { useDeveloperMode } from "./hooks/use-developer-mode";
+import { useExtensionSync } from "./hooks/use-extension-sync";
+import { useCustomTokens } from "./hooks/use-custom-tokens";
 
 type TabSection = "tiers" | "guide" | "settings";
 
@@ -18,125 +20,43 @@ interface TabItem {
 	icon: typeof Layers;
 }
 
-const TABS: TabItem[] = [
-	{ id: "tiers", label: "Tiers", icon: Layers },
-	{ id: "guide", label: "Guide", icon: BookOpen },
-	{ id: "settings", label: "Tokens", icon: Settings2 },
-];
-
 export default function Popup() {
-	const [selectedLayer, setSelectedLayer] = useState<OfferTierId>("12m");
-	const [extensionState, setExtensionState] = useState<ExtensionState | null>(null);
-	const [activeTab, setActiveTab] = useState<chrome.tabs.Tab | null>(null);
-	const [isOnGoogleOne, setIsOnGoogleOne] = useState(false);
-	const [isRefreshing, setIsRefreshing] = useState(false);
 	const [activeTabSection, setActiveTabSection] = useState<TabSection>("tiers");
-	const [customTokens, setCustomTokens] = useState<CustomTokensMap>({});
-	const [settingsSaved, setSettingsSaved] = useState(false);
-	const [isDark, setIsDark] = useState(() => {
-		if (
-			typeof window !== "undefined" &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches
-		) {
-			return true;
+
+	const { isDark, toggleTheme } = useTheme();
+	const { isDevMode, handleVersionClick } = useDeveloperMode();
+	const {
+		selectedLayer,
+		activeTab,
+		isOnGoogleOne,
+		isMounted,
+		isRefreshing,
+		handleSelectLayer,
+		handleReloadPage,
+	} = useExtensionSync();
+
+	const {
+		customTokens,
+		settingsSaved,
+		handleTokenChange,
+		handleSaveCustomTokens,
+		handleResetCustomTokens,
+	} = useCustomTokens(selectedLayer, activeTab?.id, isOnGoogleOne);
+
+	// Effective active tab (falls back to tiers if settings tab is hidden)
+	const currentTab = !isDevMode && activeTabSection === "settings" ? "tiers" : activeTabSection;
+
+	// Dynamic tab items based on developer mode flag
+	const tabs: TabItem[] = useMemo(() => {
+		const base: TabItem[] = [
+			{ id: "tiers", label: "Tiers", icon: Layers },
+			{ id: "guide", label: "Guide", icon: BookOpen },
+		];
+		if (isDevMode) {
+			base.push({ id: "settings", label: "Tokens", icon: Settings2 });
 		}
-		return false;
-	});
-
-	// Theme synchronization
-	useEffect(() => {
-		document.documentElement.classList.toggle("dark", isDark);
-	}, [isDark]);
-
-	useEffect(() => {
-		if (typeof chrome !== "undefined" && chrome.storage) {
-			chrome.storage.local.get(["gapt_theme"], (res) => {
-				if (res?.gapt_theme) {
-					setIsDark(res.gapt_theme === "dark");
-				}
-			});
-		}
-	}, []);
-
-	const toggleTheme = () => {
-		setIsDark((prev) => {
-			const next = !prev;
-			if (typeof chrome !== "undefined" && chrome.storage) {
-				chrome.storage.local.set({ gapt_theme: next ? "dark" : "light" });
-			}
-			return next;
-		});
-	};
-
-	const queryCurrentTabAndState = useCallback(() => {
-		if (typeof chrome === "undefined" || !chrome.tabs) return;
-
-		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-			const current = tabs && tabs[0];
-			setActiveTab(current || null);
-
-			const currentUrl = current?.url || "";
-			const onGoogleOne = currentUrl.includes("one.google.com");
-			setIsOnGoogleOne(onGoogleOne);
-
-			if (current?.id && onGoogleOne) {
-				chrome.tabs.sendMessage(current.id, { type: "getState" }, (response) => {
-					if (chrome.runtime.lastError || !response || !response.ok) {
-						setExtensionState(null);
-						return;
-					}
-					setExtensionState(response.data as ExtensionState);
-				});
-			} else {
-				setExtensionState(null);
-			}
-		});
-	}, []);
-
-	// Initialize configuration from local storage
-	useEffect(() => {
-		if (typeof chrome === "undefined" || !chrome.storage) return;
-
-		chrome.storage.local.get(
-			[SUBSCRIPTION_CONSTANTS.STORAGE_KEY_LAYER, SUBSCRIPTION_CONSTANTS.STORAGE_KEY_CUSTOM_TOKENS],
-			(result) => {
-				const savedLayer = result[SUBSCRIPTION_CONSTANTS.STORAGE_KEY_LAYER] as
-					| OfferTierId
-					| undefined;
-				if (savedLayer) {
-					setSelectedLayer(savedLayer);
-				}
-				if (result[SUBSCRIPTION_CONSTANTS.STORAGE_KEY_CUSTOM_TOKENS]) {
-					setCustomTokens(
-						result[SUBSCRIPTION_CONSTANTS.STORAGE_KEY_CUSTOM_TOKENS] as CustomTokensMap,
-					);
-				}
-			},
-		);
-
-		queryCurrentTabAndState();
-		const interval = setInterval(queryCurrentTabAndState, 2000);
-		return () => clearInterval(interval);
-	}, [queryCurrentTabAndState]);
-
-	// Switch layer and synchronize with active tab
-	const handleSelectLayer = (layer: OfferTierId) => {
-		setSelectedLayer(layer);
-
-		if (typeof chrome === "undefined") return;
-
-		chrome.storage.local.set({ [SUBSCRIPTION_CONSTANTS.STORAGE_KEY_LAYER]: layer }, () => {
-			if (activeTab?.id && isOnGoogleOne) {
-				chrome.tabs.sendMessage(activeTab.id, { type: "setLayer", layer }, (response) => {
-					void chrome.runtime.lastError;
-					if (response && response.ok && response.data) {
-						setExtensionState(response.data as ExtensionState);
-					}
-					setTimeout(queryCurrentTabAndState, 300);
-				});
-			}
-		});
-	};
+		return base;
+	}, [isDevMode]);
 
 	const handleOpenGoogleOne = () => {
 		if (typeof chrome !== "undefined" && chrome.tabs) {
@@ -154,64 +74,13 @@ export default function Popup() {
 		}
 	};
 
-	const handleReloadPage = () => {
-		if (typeof chrome !== "undefined" && chrome.tabs && activeTab?.id) {
-			setIsRefreshing(true);
-			chrome.tabs.reload(activeTab.id, {}, () => {
-				setTimeout(() => {
-					setIsRefreshing(false);
-					queryCurrentTabAndState();
-				}, 1000);
-			});
-		}
-	};
-
-	const handleTokenChange = (key: Exclude<OfferTierId, "off">, value: string) => {
-		setCustomTokens((prev) => ({ ...prev, [key]: value }));
-	};
-
-	const handleSaveCustomTokens = () => {
-		if (typeof chrome !== "undefined" && chrome.storage) {
-			chrome.storage.local.set(
-				{ [SUBSCRIPTION_CONSTANTS.STORAGE_KEY_CUSTOM_TOKENS]: customTokens },
-				() => {
-					setSettingsSaved(true);
-					setTimeout(() => setSettingsSaved(false), 2000);
-					if (activeTab?.id && isOnGoogleOne) {
-						chrome.tabs.sendMessage(activeTab.id, {
-							type: "setLayer",
-							layer: selectedLayer,
-						});
-					}
-				},
-			);
-		}
-	};
-
-	const handleResetCustomTokens = () => {
-		setCustomTokens({});
-		if (typeof chrome !== "undefined" && chrome.storage) {
-			chrome.storage.local.remove([SUBSCRIPTION_CONSTANTS.STORAGE_KEY_CUSTOM_TOKENS], () => {
-				setSettingsSaved(true);
-				setTimeout(() => setSettingsSaved(false), 2000);
-				if (activeTab?.id && isOnGoogleOne) {
-					chrome.tabs.sendMessage(activeTab.id, {
-						type: "setLayer",
-						layer: selectedLayer,
-					});
-				}
-			});
-		}
-	};
-
-	const isMounted = Boolean(extensionState?.mounted && selectedLayer !== "off");
-
 	return (
 		<div className="flex w-95 flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/20">
 			<PopupHeader
 				isDark={isDark}
 				onToggleTheme={toggleTheme}
 				onOpenGoogleOne={handleOpenGoogleOne}
+				onVersionClick={handleVersionClick}
 			/>
 
 			<PopupStatusBanner
@@ -223,10 +92,14 @@ export default function Popup() {
 				onOpenGoogleOne={handleOpenGoogleOne}
 			/>
 
-			{/* Navigation Tabs */}
-			<div className="grid grid-cols-3 border-b border-border/60 bg-muted/20 px-3 py-1">
-				{TABS.map(({ id, label, icon: Icon }) => {
-					const isActive = activeTabSection === id;
+			{/* Navigation Tabs (2 columns normally, 3 when dev mode active) */}
+			<div
+				className={`grid ${
+					isDevMode ? "grid-cols-3" : "grid-cols-2"
+				} border-b border-border/60 bg-muted/20 px-3 py-1`}
+			>
+				{tabs.map(({ id, label, icon: Icon }) => {
+					const isActive = currentTab === id;
 					return (
 						<button
 							key={id}
@@ -246,15 +119,15 @@ export default function Popup() {
 			</div>
 
 			{/* Tab Views */}
-			{activeTabSection === "tiers" && (
+			{currentTab === "tiers" && (
 				<TiersTab
 					selectedLayer={selectedLayer}
 					disabled={!isOnGoogleOne}
 					onSelectLayer={handleSelectLayer}
 				/>
 			)}
-			{activeTabSection === "guide" && <GuideTab onOpenPlaySubs={handleOpenPlaySubs} />}
-			{activeTabSection === "settings" && (
+			{currentTab === "guide" && <GuideTab onOpenPlaySubs={handleOpenPlaySubs} />}
+			{isDevMode && currentTab === "settings" && (
 				<TokensTab
 					customTokens={customTokens}
 					settingsSaved={settingsSaved}

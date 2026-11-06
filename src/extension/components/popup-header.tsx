@@ -7,9 +7,15 @@ interface PopupHeaderProps {
 	isDark: boolean;
 	onToggleTheme: () => void;
 	onOpenGoogleOne: () => void;
+	onVersionClick?: () => void;
 }
 
-export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHeaderProps) {
+export function PopupHeader({
+	isDark,
+	onToggleTheme,
+	onOpenGoogleOne,
+	onVersionClick,
+}: PopupHeaderProps) {
 	return (
 		<header className="flex items-center justify-between border-b border-border/60 bg-card/60 px-4 py-3 backdrop-blur-sm">
 			<div className="flex items-center gap-2.5">
@@ -17,7 +23,11 @@ export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHea
 				<div>
 					<div className="flex items-center gap-1.5">
 						<h1 className="text-sm font-semibold tracking-tight">{APP_INFO.name}</h1>
-						<Badge variant="outline" className="px-1 py-0 text-[10px] font-medium">
+						<Badge
+							variant="outline"
+							onClick={onVersionClick}
+							className="cursor-default select-none px-1 py-0 text-[10px] font-medium"
+						>
 							v{APP_INFO.version}
 						</Badge>
 					</div>
