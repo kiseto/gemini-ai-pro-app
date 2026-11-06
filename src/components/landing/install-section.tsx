@@ -76,7 +76,7 @@ export function InstallSection() {
 				</div>
 
 				{/* Split Command Deck Layout */}
-				<div className="mt-16 grid items-start gap-8 lg:grid-cols-12 lg:gap-8">
+				<div className="mt-16 grid items-center gap-8 lg:grid-cols-12 lg:gap-8">
 					{/* Left: Download & Station Card */}
 					<div className="rounded-3xl border border-white/12 bg-card/95 p-6 shadow-2xl backdrop-blur-xl sm:p-8 lg:col-span-5">
 						<div className="flex items-center justify-between gap-3">
