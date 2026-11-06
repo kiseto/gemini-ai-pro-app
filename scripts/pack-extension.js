@@ -10,7 +10,7 @@ if (!fs.existsSync(outputDir)) {
 	fs.mkdirSync(outputDir, { recursive: true });
 }
 
-const zipName = path.join(outputDir, `gemini-ai-pro-portal-v${version}.zip`);
+const zipName = path.join(outputDir, `google-ai-pro-portal-v${version}.zip`);
 
 console.log(`Packaging extension to ${zipName}...`);
 

@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "Gemini AI Pro Portal",
+	"name": "Google AI Pro Portal",
 	"version": "1.0.0",
 	"description": "Smart subscription & promo offer injector for Google One AI Premium with checkout safety guard.",
 	"permissions": ["storage"],
@@ -11,7 +11,7 @@
 	],
 	"action": {
 		"default_popup": "src/extension/popup.html",
-		"default_title": "Gemini AI Pro Portal"
+		"default_title": "Google AI Pro Portal"
 	},
 	"icons": {
 		"16": "icons/16.png",

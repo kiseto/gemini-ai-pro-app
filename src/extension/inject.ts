@@ -7,7 +7,7 @@ import {
 import type { CustomTokensMap, ExtensionState, WindowBridgeMessage } from "./types";
 
 /**
- * Gemini AI Pro Portal - Main Execution World Script
+ * Google AI Pro Portal - Main Execution World Script
  *
  * Runs directly in the MAIN page execution context of one.google.com.
  * Intercepts Google One subscription checkout requests and replaces offer tokens

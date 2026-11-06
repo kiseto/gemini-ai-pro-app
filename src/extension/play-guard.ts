@@ -1,7 +1,7 @@
 import type { GuardEvaluation, GuardSafetyLevel } from "./types";
 
 /**
- * Gemini AI Pro Portal - Google Play Checkout Safety Guard
+ * Google AI Pro Portal - Google Play Checkout Safety Guard
  *
  * Runs inside Google Play checkout iframes (`tokenized.play.google.com`).
  * Inspects real-time checkout terms before the user confirms a subscription.

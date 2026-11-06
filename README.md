@@ -1,4 +1,4 @@
-# Gemini AI Pro Portal
+# Google AI Pro Portal
 
 A unified repository containing a **modern product landing page** and an **automated browser extension** (Manifest V3) for Google One 2TB AI Premium promotional subscriptions.
 
@@ -58,7 +58,7 @@ gemini-ai-pro-app/
 │       ├── token-config.ts         # Token resolver merging .env and local overrides
 │       └── icons/                  # 16px, 48px, 128px extension icons
 ├── scripts/
-│   └── pack-extension.js           # Creates releases/gemini-ai-pro-portal-v*.zip archive
+│   └── pack-extension.js           # Creates releases/google-ai-pro-portal-v*.zip archive
 ├── .env.example                    # Template documenting all environment variables
 ├── .env                            # Local environment configuration (gitignored)
 ├── vite.config.ts                  # Vite config for landing page build
@@ -74,7 +74,7 @@ All promotional tokens are defined in `.env` (copy from `.env.example`):
 
 ```bash
 # Public Application Metadata
-VITE_APP_NAME="Gemini AI Pro Portal"
+VITE_APP_NAME="Google AI Pro Portal"
 VITE_APP_SHORT_NAME="AI Pro Portal"
 VITE_APP_URL="https://gemini-ai-pro.pages.dev"
 VITE_APP_VERSION="1.0.0"
@@ -96,7 +96,7 @@ VITE_OFFER_TOKEN_YT_PREMIUM="your_youtube_premium_addon_token_here"
 
 - **`npm run dev:ext`**: Launches Vite in watch mode targeting the browser extension.
 - **`npm run build:ext`**: Bundles all extension entrypoints into `dist-ext/`.
-- **`npm run pack:ext`**: Builds the extension and packages `releases/gemini-ai-pro-portal-v1.0.0.zip` ready for distribution.
+- **`npm run pack:ext`**: Builds the extension and packages `releases/google-ai-pro-portal-v1.0.0.zip` ready for distribution.
 
 ### Web Landing Page Workflow
 

@@ -9,7 +9,7 @@ import type {
 } from "./types";
 
 /**
- * Gemini AI Pro Portal - Content Script (Isolated World)
+ * Google AI Pro Portal - Content Script (Isolated World)
  *
  * Runs on `https://one.google.com/*`. Acts as a secure, typesafe bridge between:
  * 1. The Chrome Extension runtime / popup / storage
