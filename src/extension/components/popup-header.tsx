@@ -16,12 +16,11 @@ export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHea
 				<img src="/icons/32.png" alt={APP_INFO.shortName} className="size-7 object-contain" />
 				<div>
 					<div className="flex items-center gap-1.5">
-						<h1 className="text-sm font-semibold tracking-tight">{APP_INFO.shortName}</h1>
+						<h1 className="text-sm font-semibold tracking-tight">{APP_INFO.name}</h1>
 						<Badge variant="outline" className="px-1 py-0 text-[10px] font-medium">
 							v{APP_INFO.version}
 						</Badge>
 					</div>
-					<p className="text-[11px] text-muted-foreground">Google One 2TB AI Premium</p>
 				</div>
 			</div>
 
@@ -31,7 +30,7 @@ export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHea
 					size="icon-xs"
 					onClick={onToggleTheme}
 					title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-					className="active:scale-95 transition-transform"
+					className="transition-transform active:scale-95"
 				>
 					{isDark ? <Sun className="size-3.5" /> : <Moon className="size-3.5" />}
 				</Button>
@@ -40,7 +39,7 @@ export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHea
 					size="icon-xs"
 					onClick={onOpenGoogleOne}
 					title="Open one.google.com/plans"
-					className="active:scale-95 transition-transform"
+					className="transition-transform active:scale-95"
 				>
 					<ExternalLink className="size-3.5" />
 				</Button>
@@ -48,4 +47,3 @@ export function PopupHeader({ isDark, onToggleTheme, onOpenGoogleOne }: PopupHea
 		</header>
 	);
 }
-

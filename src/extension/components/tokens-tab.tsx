@@ -7,6 +7,7 @@ import { Eye, EyeOff, Copy, Check, Info, RotateCcw } from "lucide-react";
 interface TokensTabProps {
 	customTokens: CustomTokensMap;
 	settingsSaved: boolean;
+	disabled?: boolean;
 	onTokenChange: (key: Exclude<OfferTierId, "off">, value: string) => void;
 	onSave: () => void;
 	onReset: () => void;
@@ -27,6 +28,7 @@ const TOKEN_FIELDS: TokenFieldConfig[] = [
 export function TokensTab({
 	customTokens,
 	settingsSaved,
+	disabled = false,
 	onTokenChange,
 	onSave,
 	onReset,
@@ -44,7 +46,14 @@ export function TokensTab({
 		<div className="space-y-3 p-3 text-xs">
 			<div className="flex items-center justify-between">
 				<div>
-					<h3 className="font-semibold text-foreground">Promotional Tokens</h3>
+					<div className="flex items-center gap-1.5">
+						<h3 className="font-semibold text-foreground">Promotional Tokens</h3>
+						{disabled && (
+							<span className="text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+								(Read Only)
+							</span>
+						)}
+					</div>
 					<p className="mt-0.5 text-[11px] text-muted-foreground">
 						Tokens loaded from environment. Override or inspect below.
 					</p>
@@ -95,8 +104,9 @@ export function TokensTab({
 							<input
 								type={showTokens ? "text" : "password"}
 								value={value}
+								disabled={disabled}
 								onChange={(e) => onTokenChange(key, e.target.value.trim())}
-								className="mt-1 w-full rounded-md border border-border bg-card px-2 py-1 font-mono text-[10px] text-foreground"
+								className="mt-1 w-full rounded-md border border-border bg-card px-2 py-1 font-mono text-[10px] text-foreground disabled:opacity-50 disabled:cursor-not-allowed"
 							/>
 						</div>
 					);
@@ -109,13 +119,14 @@ export function TokensTab({
 			</div>
 
 			<div className="flex gap-2 pt-1">
-				<Button size="xs" onClick={onSave} className="flex-1 text-xs">
+				<Button size="xs" onClick={onSave} disabled={disabled} className="flex-1 text-xs">
 					Save Overrides
 				</Button>
 				<Button
 					variant="outline"
 					size="xs"
 					onClick={onReset}
+					disabled={disabled}
 					className="text-xs"
 					title="Reset to environment defaults"
 				>

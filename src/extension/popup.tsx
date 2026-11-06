@@ -247,13 +247,18 @@ export default function Popup() {
 
 			{/* Tab Views */}
 			{activeTabSection === "tiers" && (
-				<TiersTab selectedLayer={selectedLayer} onSelectLayer={handleSelectLayer} />
+				<TiersTab
+					selectedLayer={selectedLayer}
+					disabled={!isOnGoogleOne}
+					onSelectLayer={handleSelectLayer}
+				/>
 			)}
 			{activeTabSection === "guide" && <GuideTab onOpenPlaySubs={handleOpenPlaySubs} />}
 			{activeTabSection === "settings" && (
 				<TokensTab
 					customTokens={customTokens}
 					settingsSaved={settingsSaved}
+					disabled={!isOnGoogleOne}
 					onTokenChange={handleTokenChange}
 					onSave={handleSaveCustomTokens}
 					onReset={handleResetCustomTokens}
