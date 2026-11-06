@@ -51,7 +51,7 @@ declare global {
 		"免费试用",
 		"不会向您收费",
 		"不会收费",
-	];
+	] as const;
 
 	const IMMEDIATE_CHARGE_PATTERNS = [
 		"/mo after",
@@ -69,12 +69,12 @@ declare global {
 		"amount due today",
 		"立即付款",
 		"今日扣款",
-	];
+	] as const;
 
 	let guardBannerElement: HTMLDivElement | null = null;
 
 	/* ==========================================================================
-	 * Lucide Vector SVG Icon Helpers (TrustedTypes & CSP Compliant)
+	 * TrustedTypes & CSP Compliant DOM / SVG Helpers
 	 * ========================================================================== */
 
 	function createSvgElement<K extends keyof SVGElementTagNameMap>(
@@ -88,7 +88,42 @@ declare global {
 		return el;
 	}
 
+	function createStyledElement<K extends keyof HTMLElementTagNameMap>(
+		tag: K,
+		styleText: string,
+		textContent?: string,
+	): HTMLElementTagNameMap[K] {
+		const el = document.createElement(tag);
+		el.style.cssText = styleText;
+		if (textContent) el.textContent = textContent;
+		return el;
+	}
+
+	function ensureKeyframeStyles() {
+		if (document.getElementById("gapt-guard-style")) return;
+		const styleEl = document.createElement("style");
+		styleEl.id = "gapt-guard-style";
+		styleEl.textContent =
+			"@keyframes gapt-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }";
+		document.head?.appendChild(styleEl);
+	}
+
 	type LucideIconName = "shield-check" | "shield-alert" | "alert-triangle" | "loader" | "x";
+
+	const SHIELD_OUTLINE =
+		"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z";
+
+	const ICON_PATHS: Record<LucideIconName, readonly string[]> = {
+		"shield-check": [SHIELD_OUTLINE, "m9 12 2 2 4-4"],
+		"shield-alert": [SHIELD_OUTLINE, "M12 8v4", "M12 16h.01"],
+		"alert-triangle": [
+			"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z",
+			"M12 9v4",
+			"M12 17h.01",
+		],
+		loader: ["M21 12a9 9 0 1 1-6.219-8.56"],
+		x: ["M18 6 6 18", "m6 6 12 12"],
+	};
 
 	function createLucideSvg(icon: LucideIconName, size = 20): SVGSVGElement {
 		const svg = createSvgElement("svg", {
@@ -102,55 +137,9 @@ declare global {
 			"stroke-linejoin": "round",
 		});
 
-		if (icon === "shield-check") {
-			const path1 = createSvgElement("path", {
-				d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-			});
-			const path2 = createSvgElement("path", {
-				d: "m9 12 2 2 4-4",
-			});
-			svg.appendChild(path1);
-			svg.appendChild(path2);
-		} else if (icon === "shield-alert") {
-			const path1 = createSvgElement("path", {
-				d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-			});
-			const path2 = createSvgElement("path", {
-				d: "M12 8v4",
-			});
-			const path3 = createSvgElement("path", {
-				d: "M12 16h.01",
-			});
-			svg.appendChild(path1);
-			svg.appendChild(path2);
-			svg.appendChild(path3);
-		} else if (icon === "alert-triangle") {
-			const path1 = createSvgElement("path", {
-				d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z",
-			});
-			const path2 = createSvgElement("path", {
-				d: "M12 9v4",
-			});
-			const path3 = createSvgElement("path", {
-				d: "M12 17h.01",
-			});
-			svg.appendChild(path1);
-			svg.appendChild(path2);
-			svg.appendChild(path3);
-		} else if (icon === "loader") {
-			const path = createSvgElement("path", {
-				d: "M21 12a9 9 0 1 1-6.219-8.56",
-			});
-			svg.appendChild(path);
-		} else if (icon === "x") {
-			const path1 = createSvgElement("path", {
-				d: "M18 6 6 18",
-			});
-			const path2 = createSvgElement("path", {
-				d: "m6 6 12 12",
-			});
-			svg.appendChild(path1);
-			svg.appendChild(path2);
+		const paths = ICON_PATHS[icon] ?? [];
+		for (const d of paths) {
+			svg.appendChild(createSvgElement("path", { d }));
 		}
 
 		return svg;
@@ -215,22 +204,23 @@ declare global {
 		},
 	};
 
+	function dismissBanner() {
+		if (guardBannerElement) {
+			guardBannerElement.style.opacity = "0";
+			guardBannerElement.style.transform = "translateX(-50%) translateY(-10px)";
+			setTimeout(() => guardBannerElement?.remove(), 250);
+		}
+	}
+
 	function createBanner(evalResult: GuardEvaluation) {
 		if (!document.body) return;
 
-		// Inject keyframe animation for spinning loader if not already present
-		if (!document.getElementById("gapt-guard-style")) {
-			const styleEl = document.createElement("style");
-			styleEl.id = "gapt-guard-style";
-			styleEl.textContent =
-				"@keyframes gapt-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }";
-			document.head?.appendChild(styleEl);
-		}
+		ensureKeyframeStyles();
 
 		if (!guardBannerElement) {
-			guardBannerElement = document.createElement("div");
-			guardBannerElement.id = "gapt-checkout-safety-guard";
-			guardBannerElement.style.cssText = `
+			guardBannerElement = createStyledElement(
+				"div",
+				`
 				position: fixed !important;
 				top: 14px !important;
 				left: 50% !important;
@@ -249,8 +239,9 @@ declare global {
 				transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 				opacity: 1 !important;
 				box-sizing: border-box !important;
-			`;
-
+			`,
+			);
+			guardBannerElement.id = "gapt-checkout-safety-guard";
 			document.body.appendChild(guardBannerElement);
 		}
 
@@ -260,19 +251,21 @@ declare global {
 		guardBannerElement.style.boxShadow = theme.glow;
 		guardBannerElement.style.color = "#ffffff";
 
-		// Clear previous content safely without innerHTML (TrustedTypes compliant)
+		// Clear previous children
 		while (guardBannerElement.firstChild) {
 			guardBannerElement.removeChild(guardBannerElement.firstChild);
 		}
 
-		// Main content row: [icon] [textGroup]
-		const contentRow = document.createElement("div");
-		contentRow.style.cssText =
-			"display: flex !important; align-items: flex-start !important; gap: 12px !important; flex: 1 !important; min-width: 0 !important;";
+		// Content row: [icon] [textGroup]
+		const contentRow = createStyledElement(
+			"div",
+			"display: flex !important; align-items: flex-start !important; gap: 12px !important; flex: 1 !important; min-width: 0 !important;",
+		);
 
-		// Lucide Icon container
-		const iconContainer = document.createElement("div");
-		iconContainer.style.cssText = `
+		// Lucide icon container
+		const iconContainer = createStyledElement(
+			"div",
+			`
 			width: 36px !important;
 			height: 36px !important;
 			border-radius: 10px !important;
@@ -284,7 +277,8 @@ declare global {
 			color: ${theme.iconColor} !important;
 			flex-shrink: 0 !important;
 			margin-top: 1px !important;
-		`;
+		`,
+		);
 		const iconSvg = createLucideSvg(theme.iconName, 20);
 		if (theme.iconName === "loader") {
 			iconSvg.style.animation = "gapt-spin 1s linear infinite";
@@ -293,13 +287,15 @@ declare global {
 		contentRow.appendChild(iconContainer);
 
 		// Text group: [badge] -> [title] -> [description]
-		const textGroup = document.createElement("div");
-		textGroup.style.cssText =
-			"display: flex !important; flex-direction: column !important; gap: 3px !important; min-width: 0 !important; flex: 1 !important;";
+		const textGroup = createStyledElement(
+			"div",
+			"display: flex !important; flex-direction: column !important; gap: 3px !important; min-width: 0 !important; flex: 1 !important;",
+		);
 
 		// Row 1: [badge]
-		const tag = document.createElement("span");
-		tag.style.cssText = `
+		const tag = createStyledElement(
+			"span",
+			`
 			display: inline-flex !important;
 			align-items: center !important;
 			font-size: 9px !important;
@@ -314,32 +310,36 @@ declare global {
 			line-height: 1.3 !important;
 			width: fit-content !important;
 			margin-bottom: 1px !important;
-		`;
-		tag.textContent = theme.tagText;
+		`,
+			theme.tagText,
+		);
 		textGroup.appendChild(tag);
 
 		// Row 2: [title]
-		const titleEl = document.createElement("span");
-		titleEl.style.cssText =
-			"font-weight: 700 !important; font-size: 13.5px !important; line-height: 1.3 !important; color: #ffffff !important; letter-spacing: -0.2px !important;";
-		titleEl.textContent = evalResult.message;
+		const titleEl = createStyledElement(
+			"span",
+			"font-weight: 700 !important; font-size: 13.5px !important; line-height: 1.3 !important; color: #ffffff !important; letter-spacing: -0.2px !important;",
+			evalResult.message,
+		);
 		textGroup.appendChild(titleEl);
 
 		// Row 3: [description]
 		if (evalResult.details) {
-			const detailsEl = document.createElement("div");
-			detailsEl.style.cssText =
-				"font-size: 11.5px !important; opacity: 0.88 !important; line-height: 1.35 !important; color: #ffffff !important; margin-top: 1px !important;";
-			detailsEl.textContent = evalResult.details;
+			const detailsEl = createStyledElement(
+				"div",
+				"font-size: 11.5px !important; opacity: 0.88 !important; line-height: 1.35 !important; color: #ffffff !important; margin-top: 1px !important;",
+				evalResult.details,
+			);
 			textGroup.appendChild(detailsEl);
 		}
 
 		contentRow.appendChild(textGroup);
 		guardBannerElement.appendChild(contentRow);
 
-		// Lucide Dismiss X Button (aligned to top right)
-		const dismissBtn = document.createElement("button");
-		dismissBtn.style.cssText = `
+		// Dismiss X button
+		const dismissBtn = createStyledElement(
+			"button",
+			`
 			width: 28px !important;
 			height: 28px !important;
 			border-radius: 8px !important;
@@ -355,10 +355,10 @@ declare global {
 			margin-top: 1px !important;
 			flex-shrink: 0 !important;
 			transition: background 0.15s, opacity 0.15s !important;
-		`;
+		`,
+		);
 		dismissBtn.title = "Dismiss alert";
-		const xSvg = createLucideSvg("x", 14);
-		dismissBtn.appendChild(xSvg);
+		dismissBtn.appendChild(createLucideSvg("x", 14));
 
 		dismissBtn.addEventListener("mouseenter", () => {
 			dismissBtn.style.background = "rgba(255, 255, 255, 0.22)";
@@ -368,16 +368,13 @@ declare global {
 			dismissBtn.style.background = "rgba(255, 255, 255, 0.12)";
 			dismissBtn.style.opacity = "0.8";
 		});
-
-		dismissBtn.addEventListener("click", () => {
-			if (guardBannerElement) {
-				guardBannerElement.style.opacity = "0";
-				guardBannerElement.style.transform = "translateX(-50%) translateY(-10px)";
-				setTimeout(() => guardBannerElement?.remove(), 250);
-			}
-		});
+		dismissBtn.addEventListener("click", dismissBanner);
 
 		guardBannerElement.appendChild(dismissBtn);
+	}
+
+	function matchesAnyPattern(text: string, patterns: readonly string[]): boolean {
+		return patterns.some((p) => text.includes(p));
 	}
 
 	function evaluateCheckoutTerms(): GuardEvaluation {
@@ -402,14 +399,10 @@ declare global {
 			};
 		}
 
-		const hasFreeIndicator = FREE_TRIAL_PATTERNS.some((pattern) =>
-			bodyText.includes(pattern.toLowerCase()),
-		);
-		const hasPaidIndicator = IMMEDIATE_CHARGE_PATTERNS.some((pattern) =>
-			bodyText.includes(pattern.toLowerCase()),
-		);
+		const hasFree = matchesAnyPattern(bodyText, FREE_TRIAL_PATTERNS);
+		const hasPaid = matchesAnyPattern(bodyText, IMMEDIATE_CHARGE_PATTERNS);
 
-		if (hasFreeIndicator && !hasPaidIndicator) {
+		if (hasFree && !hasPaid) {
 			return {
 				level: "safe",
 				message: "Verified: $0.00 Free Trial Detected",
@@ -417,7 +410,7 @@ declare global {
 			};
 		}
 
-		if (hasPaidIndicator && !hasFreeIndicator) {
+		if (hasPaid && !hasFree) {
 			return {
 				level: "danger",
 				message: "Warning: Immediate Charge Detected!",
@@ -426,7 +419,7 @@ declare global {
 			};
 		}
 
-		if (hasFreeIndicator && hasPaidIndicator) {
+		if (hasFree && hasPaid) {
 			return {
 				level: "warning",
 				message: "Notice: Mixed Pricing Terms Found",
@@ -443,12 +436,9 @@ declare global {
 	}
 
 	function runInspection() {
-		const result = evaluateCheckoutTerms();
-		createBanner(result);
+		createBanner(evaluateCheckoutTerms());
 	}
 
 	// Schedule inspection passes safely (fixed intervals, no MutationObserver loop)
-	setTimeout(runInspection, 1000);
-	setTimeout(runInspection, 2500);
-	setTimeout(runInspection, 5000);
+	[1000, 2500, 5000].forEach((ms) => setTimeout(runInspection, ms));
 })();
