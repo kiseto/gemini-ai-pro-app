@@ -8,6 +8,7 @@ A modern, production-ready React application initialized with the latest ecosyst
 - **Bundler & Dev Server**: [Vite 8](https://vite.dev/)
 - **Language**: [TypeScript 7](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (CSS-first engine with `@theme inline`)
+- **Linter & Formatter**: [OXC](https://oxc.rs/) (`oxlint` & `oxfmt` with Tailwind class sorting)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/) (using Radix UI primitives & Nova preset)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Typography**: [Geist Font](https://vercel.com/font) (`@fontsource-variable/geist`)
@@ -33,24 +34,45 @@ A modern, production-ready React application initialized with the latest ecosyst
 ## Getting Started
 
 ### Development
+
 Start the local development server:
+
 ```bash
 npm run dev
 ```
 
 ### Production Build
+
 Type-check and bundle for production:
+
 ```bash
 npm run build
 ```
 
-### Type Checking / Lint
+### Lint & Formatting
+
+Run OXC linter:
+
 ```bash
 npm run lint
 ```
 
+Format all files with OXC formatter:
+
+```bash
+npm run format
+```
+
+Check formatting:
+
+```bash
+npm run format:check
+```
+
 ### Preview Build
+
 Preview the production build locally:
+
 ```bash
 npm run preview
 ```
@@ -58,11 +80,13 @@ npm run preview
 ## Adding More shadcn/ui Components
 
 To add additional shadcn/ui components:
+
 ```bash
 npx shadcn@latest add <component-name>
 ```
 
 Examples:
+
 ```bash
 npx shadcn@latest add dialog
 npx shadcn@latest add dropdown-menu
