@@ -12,6 +12,8 @@ export default defineConfig(() => {
 			react(),
 			tailwindcss(),
 			webExtension({
+				disableAutoLaunch: true,
+				skipManifestValidation: true,
 				manifest: () => ({
 					...manifest,
 					name: APP_INFO.name,
@@ -51,7 +53,7 @@ export default defineConfig(() => {
 		},
 		build: {
 			outDir: "dist-ext",
-			emptyOutDir: true,
+			emptyOutDir: false,
 		},
 	};
 });

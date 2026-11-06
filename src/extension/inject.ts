@@ -116,40 +116,52 @@ declare global {
 		function updateBadgeContent() {
 			if (!statusBadgeElement) return;
 
-			if (isBadgeMinimized) {
-				statusBadgeElement.innerHTML = `
-					<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${isMounted ? "#10b981" : "#9ca3af"};"></span>
-					<span style="font-weight:600;font-size:11px;">AI Pro</span>
-				`;
-				statusBadgeElement.title = text + " (Click to expand)";
-				return;
+			// Clear previous content safely without innerHTML (TrustedTypes compliant)
+			while (statusBadgeElement.firstChild) {
+				statusBadgeElement.removeChild(statusBadgeElement.firstChild);
 			}
 
-			const indicatorColor = isMounted ? "#10b981" : "#9ca3af";
-			const pulseAnim = isMounted
-				? "animation: gapt-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;"
-				: "";
+			const isDark =
+				window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+			statusBadgeElement.style.background = isDark
+				? "rgba(24, 24, 27, 0.95)"
+				: "rgba(255, 255, 255, 0.96)";
+			statusBadgeElement.style.color = isDark ? "#f4f4f5" : "#18181b";
+			statusBadgeElement.style.border = isDark
+				? "1px solid rgba(255, 255, 255, 0.15)"
+				: "1px solid rgba(0, 0, 0, 0.12)";
 
-			statusBadgeElement.innerHTML = `
-				<style>
-					@keyframes gapt-pulse {
-						0%, 100% { opacity: 1; transform: scale(1); }
-						50% { opacity: 0.6; transform: scale(1.1); }
-					}
-					@media (prefers-color-scheme: dark) {
-						#gapt-floating-badge {
-							background: rgba(24, 24, 27, 0.92) !important;
-							color: #f4f4f5 !important;
-							border-color: rgba(255, 255, 255, 0.12) !important;
-							box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35) !important;
-						}
-					}
-				</style>
-				<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${indicatorColor};${pulseAnim}"></span>
-				<span style="font-weight:600;letter-spacing:-0.2px;">${text}</span>
-				<span style="opacity:0.4;font-size:10px;margin-left:2px;">✕</span>
+			const dot = document.createElement("span");
+			dot.style.cssText = `
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: ${isMounted ? "#10b981" : "#9ca3af"};
+				flex-shrink: 0;
 			`;
-			statusBadgeElement.title = "Click to minimize";
+			statusBadgeElement.appendChild(dot);
+
+			const label = document.createElement("span");
+			label.style.cssText =
+				"font-family: inherit !important; font-size: 12px !important; font-weight: 600 !important; white-space: nowrap !important; color: inherit !important;";
+
+			if (isBadgeMinimized) {
+				label.textContent = "AI Pro";
+				statusBadgeElement.title = `${text} (Click to expand)`;
+			} else {
+				label.textContent = text;
+				statusBadgeElement.title = "Click to minimize";
+			}
+			statusBadgeElement.appendChild(label);
+
+			if (!isBadgeMinimized) {
+				const closeBtn = document.createElement("span");
+				closeBtn.style.cssText =
+					"opacity: 0.45; font-size: 11px; margin-left: 2px; cursor: pointer; color: inherit !important;";
+				closeBtn.textContent = "✕";
+				statusBadgeElement.appendChild(closeBtn);
+			}
 		}
 	}
 
