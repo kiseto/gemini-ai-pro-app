@@ -19,8 +19,8 @@
 		"dev:ext": "set VITE_EXT_BUILD=true&& vite -c vite.ext.config.ts",
 		"build:ext": "set VITE_EXT_BUILD=true&& vite build -c vite.ext.config.ts",
 		"pack:ext": "npm run build:ext && node scripts/pack-extension.js",
-		"build": "oxlint --deny-warnings && tsc -b && vite build",
-		"lint": "oxlint",
+		"build": "oxlint src --deny-warnings && tsc -b && vite build",
+		"lint": "oxlint src",
 		"preview": "vite preview",
 		"format": "oxfmt . --write --ignore-path=.oxfmtignore",
 		"format:check": "oxfmt . --check --ignore-path=.oxfmtignore"
