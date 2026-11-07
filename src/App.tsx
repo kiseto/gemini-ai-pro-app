@@ -7,6 +7,8 @@ import { InstallSection } from "@/components/landing/install-section";
 import { PreviewSection } from "@/components/landing/preview-section";
 import { StackingSection } from "@/components/landing/stacking-section";
 import { SupportSection } from "@/components/landing/support-section";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export function App() {
 	return (
@@ -22,6 +24,8 @@ export function App() {
 				<DownloadSection />
 			</main>
 			<Footer />
+			<Analytics />
+			<SpeedInsights />
 		</div>
 	);
 }
