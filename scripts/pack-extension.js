@@ -59,8 +59,6 @@ try {
 
 	if (fs.existsSync(instructionsSrc)) {
 		fs.copyFileSync(instructionsSrc, path.join(stagingDir, "INSTRUCTIONS.txt"));
-		// Also include instructions inside the extension folder for direct access
-		fs.copyFileSync(instructionsSrc, path.join(stagingExtDir, "INSTRUCTIONS.txt"));
 	}
 
 	// Compress-Archive is a native PowerShell cmdlet available on Windows
