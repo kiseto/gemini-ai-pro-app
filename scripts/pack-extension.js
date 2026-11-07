@@ -42,6 +42,18 @@ try {
 	// Copy dist-ext into staging/extension
 	fs.cpSync(distExtDir, stagingExtDir, { recursive: true });
 
+	// Ensure web-only assets are never packaged into the extension
+	const unusedExtAssets = [
+		path.join(stagingExtDir, "images"),
+		path.join(stagingExtDir, "favicon.ico"),
+		path.join(stagingExtDir, "site.webmanifest"),
+	];
+	for (const item of unusedExtAssets) {
+		if (fs.existsSync(item)) {
+			fs.rmSync(item, { recursive: true, force: true });
+		}
+	}
+
 	// Copy release instructions
 	const instructionsSrc = path.resolve("./releases/INSTRUCTIONS.txt");
 

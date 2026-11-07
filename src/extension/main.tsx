@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import "../index.css";
+import "./extension.css";
 import Popup from "./popup";
 
 const container = document.getElementById("root");

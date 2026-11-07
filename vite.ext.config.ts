@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -8,6 +9,7 @@ import { APP_INFO } from "./src/constants/app-info.ts";
 
 export default defineConfig(() => {
 	return {
+		publicDir: false,
 		plugins: [
 			react(),
 			tailwindcss(),
@@ -31,11 +33,13 @@ export default defineConfig(() => {
 					},
 				}),
 				htmlViteConfig: {
+					publicDir: false,
 					build: {
 						outDir: "dist-ext",
 					},
 				},
 				scriptViteConfig: {
+					publicDir: false,
 					build: {
 						outDir: "dist-ext",
 					},
@@ -45,6 +49,33 @@ export default defineConfig(() => {
 				},
 				watchFilePaths: ["src/**/*", "vite.ext.config.ts"],
 			}),
+			{
+				name: "clean-and-copy-extension-assets",
+				closeBundle() {
+					const distExt = path.resolve(import.meta.dirname, "./dist-ext");
+					const srcIcons = path.resolve(import.meta.dirname, "./public/icons");
+					const destIcons = path.join(distExt, "icons");
+
+					// Ensure only extension icons are present
+					if (fs.existsSync(srcIcons)) {
+						fs.mkdirSync(destIcons, { recursive: true });
+						fs.cpSync(srcIcons, destIcons, { recursive: true });
+					}
+
+					// Remove any web-only assets if copied by bundler
+					const unusedAssets = [
+						path.join(distExt, "images"),
+						path.join(distExt, "favicon.ico"),
+						path.join(distExt, "site.webmanifest"),
+					];
+
+					for (const item of unusedAssets) {
+						if (fs.existsSync(item)) {
+							fs.rmSync(item, { recursive: true, force: true });
+						}
+					}
+				},
+			},
 		],
 		resolve: {
 			alias: {

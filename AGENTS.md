@@ -231,6 +231,7 @@ gemini-ai-pro-app/
 │       │   ├── use-developer-mode.ts # 5-click easter egg detector
 │       │   ├── use-extension-sync.ts # Chrome tab status & content-script bridge
 │       │   └── use-theme.ts        # Dark/light theme sync with document class
+│       ├── extension.css           # Lightweight system-font stylesheet for extension popup
 │       ├── manifest.json           # Manifest V3 specification
 │       ├── popup.html              # Popup HTML template
 │       ├── main.tsx                # Popup React DOM root
