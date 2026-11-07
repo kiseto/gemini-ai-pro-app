@@ -106,6 +106,7 @@ export function FloatingNavbar() {
 				{/* CTA Button: Proportional, vertically centered white button */}
 				<a
 					href={APP_INFO.releaseZipUrl}
+					download="google-ai-pro-portal-v1.0.0.zip"
 					target="_blank"
 					rel="noreferrer noopener"
 					className="group relative inline-flex h-7.5 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-white/60 bg-linear-to-b from-white via-[#fafafa] to-[#e8e8e8] px-3.5 text-[11px] font-semibold text-neutral-900 shadow-[0_2px_8px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-200 hover:from-white hover:to-[#f2f2f2] active:scale-95 sm:h-8 sm:px-4.5 sm:text-xs"

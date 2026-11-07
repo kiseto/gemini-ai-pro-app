@@ -62,6 +62,7 @@ export function DownloadSection() {
 				<div className="mt-8 flex flex-col items-center gap-3.5">
 					<a
 						href={APP_INFO.releaseZipUrl}
+						download="google-ai-pro-portal-v1.0.0.zip"
 						target="_blank"
 						rel="noreferrer noopener"
 						className="group relative cursor-pointer overflow-hidden rounded-full border border-white/60 bg-linear-to-b from-white via-[#fafafa] to-[#e8e8e8] px-10 py-4 text-[16px] font-semibold text-neutral-900 shadow-[0_12px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-300 ease-out hover:from-white hover:to-[#f2f2f2] hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] active:scale-[0.98] sm:px-11 sm:py-4.5 sm:text-[17px]"

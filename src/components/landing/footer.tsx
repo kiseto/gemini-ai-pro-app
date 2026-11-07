@@ -76,6 +76,7 @@ export function Footer() {
 								</a>
 								<a
 									href={APP_INFO.releaseZipUrl}
+									download="google-ai-pro-portal-v1.0.0.zip"
 									target="_blank"
 									rel="noreferrer noopener"
 									className="transition-colors hover:text-foreground"
