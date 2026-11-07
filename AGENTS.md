@@ -208,7 +208,7 @@ cmd /c npm run pack:ext
 
 - Orchestrated by [`vite.ext.config.ts`](file:///vite.ext.config.ts) using `vite-plugin-web-extension`.
 - Compiles `popup.html`, `content.ts`, `inject.ts`, and `play-guard.ts` into [`dist-ext/`](file:///dist-ext/).
-- Copies strictly necessary extension assets ([`public/icons/`](file:///public/icons)) into `dist-ext/`, explicitly stripping web-only assets (`images/`, `favicon.ico`, `site.webmanifest`, `og-image.png`, `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`).
+- Copies strictly necessary extension assets ([`public/icons/`](file:///public/icons)) into `dist-ext/`, explicitly stripping web-only assets (`images/`, `favicon.ico`, `site.webmanifest`, `og-image.png`, `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, `404.html`).
 - [`scripts/pack-extension.js`](file:///scripts/pack-extension.js) stages compiled `dist-ext/` assets into an `extension/` subfolder alongside `INSTRUCTIONS.txt`, then packages them using PowerShell `Compress-Archive` into [`releases/google-ai-pro-portal-v1.0.0.zip`](file:///releases).
 
 ---
@@ -218,7 +218,7 @@ cmd /c npm run pack:ext
 ```
 gemini-ai-pro-app/
 ├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
-│   ├── favicon.ico                 # 32x32 ICO
+│   ├── favicon.ico                 # Multi-resolution ICO (16x16 to 256x256)
 │   ├── site.webmanifest            # Web application manifest
 │   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
 │   ├── robots.txt                  # Search engine and AI crawler directives
@@ -236,7 +236,7 @@ gemini-ai-pro-app/
 │   ├── components/
 │   │   ├── icons.tsx               # Brand SVG icons (GitHub, YouTube)
 │   │   ├── ui/                     # Radix / shadcn accessible primitives
-│   │   └── landing/                # Modular landing page sections (Hero, Preview, Stacking, Install, FAQ, Support, Download, Footer)
+│   │   └── landing/                # Modular landing page sections (Hero, Preview, Stacking, Install, FAQ, Support, Download, Footer, NotFoundPage)
 │   └── extension/                  # Manifest V3 Extension Source
 │       ├── components/             # Modular Popup UI components
 │       │   ├── guide-tab.tsx       # Connected timeline 7-step guide
@@ -267,6 +267,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
+├── vercel.json                     # Vercel SPA routing and rewrite rules
 ├── AGENTS.md                       # This agent specification document
 ├── README.md                       # Public product documentation
 └── package.json                    # Project dependencies and npm scripts

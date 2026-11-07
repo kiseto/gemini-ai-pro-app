@@ -72,6 +72,7 @@ export default defineConfig(() => {
 						path.join(distExt, "sitemap.xml"),
 						path.join(distExt, "llms.txt"),
 						path.join(distExt, "llms-full.txt"),
+						path.join(distExt, "404.html"),
 					];
 
 					for (const item of unusedAssets) {

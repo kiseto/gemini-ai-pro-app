@@ -52,6 +52,7 @@ try {
 		path.join(stagingExtDir, "sitemap.xml"),
 		path.join(stagingExtDir, "llms.txt"),
 		path.join(stagingExtDir, "llms-full.txt"),
+		path.join(stagingExtDir, "404.html"),
 	];
 	for (const item of unusedExtAssets) {
 		if (fs.existsSync(item)) {

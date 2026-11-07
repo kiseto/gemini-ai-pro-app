@@ -43,6 +43,7 @@
 - **🔒 Zero-Telemetry & Client-Side Privacy**: Runs 100% locally in your browser. No external API servers, no telemetry, no analytics, and zero tracking.
 - **⚙️ Configurable Token Overrides**: All tokens can be overridden live in the unlocked **Tokens** tab and stored locally in `chrome.storage.local`.
 - **🌐 Comprehensive SEO & LLM Ready**: Fully optimized with Open Graph preview assets (`og-image.png`), Twitter Cards, Schema.org JSON-LD structured data, XML sitemap, `robots.txt`, and conventional `llms.txt` / `llms-full.txt` files for AI agent context ingestion.
+- **🌌 Atmospheric 404 Route Protection**: Zero-dependency client-side routing paired with Vercel rewrites and an interactive Grainient WebGL 404 page for nonexistent paths.
 - **📦 Clean Dual-Build Pipeline**: Single unified monorepo leveraging Vite 8 and `vite-plugin-web-extension` to build both the static web landing page (`dist/`) and the unpackable extension (`dist-ext/`).
 
 ---
@@ -137,7 +138,7 @@ Google One allows promotional offer stacking across eligible billing transitions
 ```
 gemini-ai-pro-app/
 ├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
-│   ├── favicon.ico                 # Root favicon
+│   ├── favicon.ico                 # Multi-resolution favicon (16x16 to 256x256)
 │   ├── site.webmanifest            # Web application manifest
 │   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
 │   ├── robots.txt                  # Search engine and AI crawler directives
@@ -164,6 +165,7 @@ gemini-ai-pro-app/
 │   │       ├── faq-section.tsx     # Frequently asked questions accordion
 │   │       ├── support-section.tsx # Independent tooling support & developer attribution
 │   │       ├── download-section.tsx # Secondary download loop section with smooth blend
+│   │       ├── not-found-page.tsx  # Interactive 404 page with Grainient WebGL background
 │   │       └── footer.tsx          # Brand footer with quick navigation links & disclaimers
 │   └── extension/                  # Manifest V3 Extension Source
 │       ├── components/             # Modular Popup UI Components
@@ -194,6 +196,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
+├── vercel.json                     # Vercel SPA routing and rewrite rules
 ├── AGENTS.md                       # Comprehensive guide for AI agents and developers
 └── package.json                    # Project scripts and dependencies
 ```

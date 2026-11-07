@@ -9,6 +9,7 @@ Google AI Pro Portal provides automated client-side subscription tier configurat
 - [Companion Web Portal](https://gemini-ai-pro-portal.vercel.app/): Interactive landing page featuring an in-browser extension simulator, visual 24-month stacking timeline, and installation guide.
 - [Extension Package v1.0.0](https://github.com/nmrisrl11/gemini-ai-pro-app/releases/download/v1.0.0/google-ai-pro-portal-v1.0.0.zip): Pre-built Chromium extension ZIP archive (Manifest V3) ready for developer-mode installation.
 - [Full Documentation](https://gemini-ai-pro-portal.vercel.app/llms-full.txt): Comprehensive single-file documentation containing full technical specifications, architecture diagrams, stacking logic, and security disclosures.
+- [404 Error Route](https://gemini-ai-pro-portal.vercel.app/404): Client-side fallback route featuring interactive WebGL Grainient background and seamless return navigation.
 - [GitHub Repository](https://github.com/nmrisrl11/gemini-ai-pro-app): Open-source TypeScript monorepo containing both the web portal and browser extension source code.
 - [GitHub Releases](https://github.com/nmrisrl11/gemini-ai-pro-app/releases): Distribution archives, release tags, and version changelogs.
 
