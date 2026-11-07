@@ -30,3 +30,4 @@ releases
 *.sw?
 
 .vercel
+.env*
