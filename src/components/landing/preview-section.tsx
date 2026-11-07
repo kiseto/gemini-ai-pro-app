@@ -1,25 +1,23 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Sparkles, X, Globe, Layers, BookOpen } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { Sparkles, X, Globe, Layers, BookOpen, Settings2 } from "lucide-react";
 import { APP_INFO } from "@/constants/app-info";
 import { type OfferTierId } from "@/constants/offers";
 import { PopupHeader } from "@/extension/components/popup-header";
 import { PopupStatusBanner } from "@/extension/components/popup-status-banner";
 import { TiersTab } from "@/extension/components/tiers-tab";
 import { GuideTab } from "@/extension/components/guide-tab";
+import { TokensTab } from "@/extension/components/tokens-tab";
 import { PopupFooter } from "@/extension/components/popup-footer";
+import { useDeveloperMode } from "@/extension/hooks/use-developer-mode";
+import type { CustomTokensMap } from "@/extension/types";
 
-type TabSection = "tiers" | "guide";
+type TabSection = "tiers" | "guide" | "settings";
 
 interface TabItem {
 	id: TabSection;
 	label: string;
 	icon: typeof Layers;
 }
-
-const TABS: TabItem[] = [
-	{ id: "tiers", label: "Tiers", icon: Layers },
-	{ id: "guide", label: "Guide", icon: BookOpen },
-];
 
 export function PreviewSection() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +27,40 @@ export function PreviewSection() {
 	const [isOnGoogleOne, setIsOnGoogleOne] = useState(true);
 	const [isMounted, setIsMounted] = useState(true);
 	const [isRefreshing, setIsRefreshing] = useState(false);
+
+	const { isDevMode, handleVersionClick } = useDeveloperMode();
+	const [customTokens, setCustomTokens] = useState<CustomTokensMap>({});
+	const [settingsSaved, setSettingsSaved] = useState(false);
+
+	// Dynamic tab items based on developer mode flag
+	const tabs: TabItem[] = useMemo(() => {
+		const base: TabItem[] = [
+			{ id: "tiers", label: "Tiers", icon: Layers },
+			{ id: "guide", label: "Guide", icon: BookOpen },
+		];
+		if (isDevMode) {
+			base.push({ id: "settings", label: "Tokens", icon: Settings2 });
+		}
+		return base;
+	}, [isDevMode]);
+
+	const currentTab = !isDevMode && activeTab === "settings" ? "tiers" : activeTab;
+
+	const handleTokenChange = (key: Exclude<OfferTierId, "off">, value: string) => {
+		setCustomTokens((prev) => ({ ...prev, [key]: value }));
+		setSettingsSaved(false);
+	};
+
+	const handleSaveCustomTokens = () => {
+		setSettingsSaved(true);
+		setTimeout(() => setSettingsSaved(false), 2500);
+	};
+
+	const handleResetCustomTokens = () => {
+		setCustomTokens({});
+		setSettingsSaved(true);
+		setTimeout(() => setSettingsSaved(false), 2500);
+	};
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -230,7 +262,10 @@ export function PreviewSection() {
 
 							{/* Actual Extension Popup Root */}
 							<div className="flex flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/20">
-								<PopupHeader onOpenGoogleOne={() => window.open(APP_INFO.googleOneUrl, "_blank")} />
+								<PopupHeader
+									onOpenGoogleOne={() => window.open(APP_INFO.googleOneUrl, "_blank")}
+									onVersionClick={handleVersionClick}
+								/>
 
 								<PopupStatusBanner
 									isMounted={isMounted}
@@ -241,10 +276,14 @@ export function PreviewSection() {
 									onOpenGoogleOne={() => window.open(APP_INFO.googleOneUrl, "_blank")}
 								/>
 
-								{/* Navigation Tabs (Strictly Tiers and Guide) */}
-								<div className="grid grid-cols-2 border-b border-border/60 bg-muted/20 px-3 py-1">
-									{TABS.map(({ id, label, icon: Icon }) => {
-										const isTabActive = activeTab === id;
+								{/* Navigation Tabs (2 columns normally, 3 when dev mode active) */}
+								<div
+									className={`grid ${
+										isDevMode ? "grid-cols-3" : "grid-cols-2"
+									} border-b border-border/60 bg-muted/20 px-3 py-1`}
+								>
+									{tabs.map(({ id, label, icon: Icon }) => {
+										const isTabActive = currentTab === id;
 										return (
 											<button
 												key={id}
@@ -265,16 +304,26 @@ export function PreviewSection() {
 
 								{/* Tab Views */}
 								<div className="max-h-115 overflow-y-auto">
-									{activeTab === "tiers" && (
+									{currentTab === "tiers" && (
 										<TiersTab
 											selectedLayer={selectedLayer}
 											disabled={!isOnGoogleOne}
 											onSelectLayer={handleSelectLayer}
 										/>
 									)}
-									{activeTab === "guide" && (
+									{currentTab === "guide" && (
 										<GuideTab
 											onOpenPlaySubs={() => window.open(APP_INFO.googlePlaySubsUrl, "_blank")}
+										/>
+									)}
+									{isDevMode && currentTab === "settings" && (
+										<TokensTab
+											customTokens={customTokens}
+											settingsSaved={settingsSaved}
+											disabled={!isOnGoogleOne}
+											onTokenChange={handleTokenChange}
+											onSave={handleSaveCustomTokens}
+											onReset={handleResetCustomTokens}
 										/>
 									)}
 								</div>

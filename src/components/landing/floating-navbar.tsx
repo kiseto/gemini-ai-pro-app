@@ -26,30 +26,19 @@ export function FloatingNavbar() {
 				return;
 			}
 
-			// Activate the last section if scrolled to the bottom of the page
-			const atBottom =
-				window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
-
-			if (atBottom) {
-				setActiveId("faq");
-				return;
-			}
-
 			// Scrollspy trigger offset below the floating navbar (~180px)
 			const targetOffset = 180;
 
-			const passedSections = NAV_ITEMS.filter((item) => {
+			// Find if any nav section currently contains the target scroll line
+			const currentSection = NAV_ITEMS.find((item) => {
 				const el = document.getElementById(item.id);
 				if (!el) return false;
 				const rect = el.getBoundingClientRect();
-				return rect.top <= targetOffset;
+				return rect.top <= targetOffset && rect.bottom > targetOffset;
 			});
 
-			if (passedSections.length > 0) {
-				setActiveId(passedSections[passedSections.length - 1].id);
-			} else {
-				setActiveId("preview");
-			}
+			// Only set active if the current scroll position actually matches a nav section
+			setActiveId(currentSection ? currentSection.id : "");
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });

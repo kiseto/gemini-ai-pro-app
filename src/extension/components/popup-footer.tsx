@@ -11,7 +11,7 @@ export function PopupFooter() {
 				rel="noreferrer"
 				className="flex items-center gap-1 transition-colors hover:text-foreground"
 			>
-				Docs &amp; Source <ChevronRight className="size-3" />
+				Source Code <ChevronRight className="size-3" />
 			</a>
 		</footer>
 	);

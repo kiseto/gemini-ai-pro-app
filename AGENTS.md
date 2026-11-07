@@ -11,7 +11,7 @@
 - **Short Name**: `AI Pro Portal`
 - **Repository Name**: `gemini-ai-pro-app` _(The directory and GitHub repo name must remain `gemini-ai-pro-app`)_
 - **Application Version**: `1.0.0`
-- **Core Purpose**: A unified monorepo containing both a modern landing page web application and an automated Manifest V3 browser extension for Google One 5TB AI Premium promotional offer management and Google Play checkout price verification.
+- **Core Purpose**: A unified monorepo containing both a modern landing page web application and an automated Manifest V3 browser extension for Google One 5TB Google AI Pro promotional offer management and Google Play checkout price verification.
 - **Upstream Blueprints**:
   1. [`sulok`](https://github.com/nmrisrl11/sulok): Dual Vite configuration (`vite.config.ts` vs `vite.ext.config.ts`), `vite-plugin-web-extension`, automated extension packaging script, Tailwind CSS v4, React 19, and Radix UI / shadcn component patterns.
   2. [`google-pro-helper-main`](https://github.com/nmrisrl11/google-pro-helper-main): Checkout request interception logic, Google One protobuf SKU patching, and Google Play checkout price verification guard, re-engineered into clean, typed, idiomatic English TypeScript.
@@ -106,7 +106,7 @@ The extension relies on Manifest V3 with 4 coordinated execution contexts:
 ### Key Request Interception Logic (`inject.ts`):
 
 - **Protobuf Node Patching (`patchNode`)**:
-  - `full_items`: Array containing the AI Premium SKU (`subs:com.google.android.apps.subscriptions.red:g1.2tb.ai.subs_variant`) and the active offer token.
+  - `full_items`: Array containing the Google AI Pro 5TB SKU (`subs:com.google.android.apps.subscriptions.red:g1.2tb.ai.subs_variant`) and the active offer token.
   - If node length > 12: Updates `node[12]` to `full_items`, extracts `subId` from `node[7][5][0]`, and adjusts subscription extension mode `node[7]`.
   - If node length > 10: Updates `node[10]` and deep child arrays `node[2][2][8]`.
 - **URL Parameter Rewriting (`rewriteUrl`)**:
@@ -195,7 +195,7 @@ cmd /c npm run pack:ext
 - Orchestrated by [`vite.ext.config.ts`](file:///vite.ext.config.ts) using `vite-plugin-web-extension`.
 - Compiles `popup.html`, `content.ts`, `inject.ts`, and `play-guard.ts` into [`dist-ext/`](file:///dist-ext/).
 - Copies root [`public/`](file:///public/) assets (`icons/`, `favicon.ico`, `manifest.json`) into `dist-ext/`.
-- [`scripts/pack-extension.js`](file:///scripts/pack-extension.js) packages `dist-ext/` using PowerShell `Compress-Archive` into [`releases/google-ai-pro-portal-v1.0.0.zip`](file:///releases).
+- [`scripts/pack-extension.js`](file:///scripts/pack-extension.js) stages compiled `dist-ext/` assets into an `extension/` subfolder alongside `INSTRUCTIONS.txt`, then packages them using PowerShell `Compress-Archive` into [`releases/google-ai-pro-portal-v1.0.0.zip`](file:///releases).
 
 ---
 

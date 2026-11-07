@@ -115,7 +115,7 @@ export function TokensTab({
 
 			<div className="flex items-start gap-1.5 rounded-md bg-muted/40 p-2 text-[11px] text-muted-foreground">
 				<Info className="mt-0.5 size-3.5 shrink-0 text-primary" />
-				<span>Tokens are securely used by the MAIN-world injector during checkout.</span>
+				<span>Tokens are securely applied during Google Play checkout verification.</span>
 			</div>
 
 			<div className="flex gap-2 pt-1">

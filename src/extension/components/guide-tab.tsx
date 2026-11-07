@@ -42,7 +42,7 @@ const GUIDE_STEPS: GuideStep[] = [
 		step: 4,
 		content: (
 			<>
-				Click <b className="text-foreground">Get discount</b> on the Google One AI Premium card.
+				Click <b className="text-foreground">Get discount</b> on the Google AI Pro (5TB) card.
 			</>
 		),
 	},
