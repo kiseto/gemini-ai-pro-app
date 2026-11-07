@@ -67,6 +67,11 @@ export default defineConfig(() => {
 						path.join(distExt, "images"),
 						path.join(distExt, "favicon.ico"),
 						path.join(distExt, "site.webmanifest"),
+						path.join(distExt, "og-image.png"),
+						path.join(distExt, "robots.txt"),
+						path.join(distExt, "sitemap.xml"),
+						path.join(distExt, "llms.txt"),
+						path.join(distExt, "llms-full.txt"),
 					];
 
 					for (const item of unusedAssets) {

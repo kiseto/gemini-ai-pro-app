@@ -19,6 +19,7 @@ export function Footer() {
 							<img
 								src="/icons/128.png"
 								alt={APP_INFO.name}
+								title={APP_INFO.name}
 								width={36}
 								height={36}
 								className="size-8 shrink-0 object-contain sm:size-9"
@@ -42,19 +43,39 @@ export function Footer() {
 								Portal
 							</span>
 							<div className="flex flex-col space-y-2.5 text-xs">
-								<a href="#preview" className="transition-colors hover:text-foreground">
+								<a
+									href="#preview"
+									title="Navigate to Extension Preview Sandbox"
+									className="transition-colors hover:text-foreground"
+								>
 									Extension Sandbox
 								</a>
-								<a href="#stacking" className="transition-colors hover:text-foreground">
+								<a
+									href="#stacking"
+									title="Navigate to 24-Month Stacking Sequence"
+									className="transition-colors hover:text-foreground"
+								>
 									24-Month Stacking
 								</a>
-								<a href="#install" className="transition-colors hover:text-foreground">
+								<a
+									href="#install"
+									title="Navigate to Extension Installation Guide"
+									className="transition-colors hover:text-foreground"
+								>
 									Installation Guide
 								</a>
-								<a href="#faq" className="transition-colors hover:text-foreground">
+								<a
+									href="#faq"
+									title="Navigate to Frequently Asked Questions"
+									className="transition-colors hover:text-foreground"
+								>
 									Questions & Answers
 								</a>
-								<a href="#support" className="transition-colors hover:text-foreground">
+								<a
+									href="#support"
+									title="Navigate to Support and Donations"
+									className="transition-colors hover:text-foreground"
+								>
 									Support Tooling
 								</a>
 							</div>
@@ -70,6 +91,7 @@ export function Footer() {
 									href={APP_INFO.googleOneUrl}
 									target="_blank"
 									rel="noreferrer noopener"
+									title="Open Google One Plans in a new tab"
 									className="transition-colors hover:text-foreground"
 								>
 									Google One Plans
@@ -79,6 +101,7 @@ export function Footer() {
 									download="google-ai-pro-portal-v1.0.0.zip"
 									target="_blank"
 									rel="noreferrer noopener"
+									title="Download Google AI Pro Portal Extension (.zip)"
 									className="transition-colors hover:text-foreground"
 								>
 									Download Extension (.zip)
@@ -87,6 +110,7 @@ export function Footer() {
 									href={APP_INFO.githubUrl}
 									target="_blank"
 									rel="noreferrer noopener"
+									title="View Google AI Pro Portal on GitHub"
 									className="transition-colors hover:text-foreground"
 								>
 									GitHub Repository
@@ -95,6 +119,7 @@ export function Footer() {
 									href={APP_INFO.githubReleasesUrl}
 									target="_blank"
 									rel="noreferrer noopener"
+									title="View Releases and Changelog on GitHub"
 									className="transition-colors hover:text-foreground"
 								>
 									Releases & Changelog
@@ -103,9 +128,28 @@ export function Footer() {
 									href={`${APP_INFO.githubUrl}/blob/main/LICENSE`}
 									target="_blank"
 									rel="noreferrer noopener"
+									title="View MIT License on GitHub"
 									className="transition-colors hover:text-foreground"
 								>
 									MIT License
+								</a>
+								<a
+									href={APP_INFO.sitemapUrl}
+									target="_blank"
+									rel="noreferrer noopener"
+									title="View XML Sitemap"
+									className="transition-colors hover:text-foreground"
+								>
+									Sitemap
+								</a>
+								<a
+									href={APP_INFO.llmsUrl}
+									target="_blank"
+									rel="noreferrer noopener"
+									title="View LLM Context (llms.txt)"
+									className="transition-colors hover:text-foreground"
+								>
+									LLM Context (llms.txt)
 								</a>
 							</div>
 						</div>

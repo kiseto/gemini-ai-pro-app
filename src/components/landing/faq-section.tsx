@@ -63,6 +63,7 @@ export function FaqSection() {
 								href={`${APP_INFO.githubUrl}/discussions`}
 								target="_blank"
 								rel="noreferrer noopener"
+								title="Join Community Discussions on GitHub"
 								className="group flex items-center justify-between py-3.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
 							>
 								<span className="flex items-center gap-2.5">
@@ -76,6 +77,7 @@ export function FaqSection() {
 								href={`${APP_INFO.githubUrl}/issues`}
 								target="_blank"
 								rel="noreferrer noopener"
+								title="Report an Issue on GitHub"
 								className="group flex items-center justify-between py-3.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
 							>
 								<span className="flex items-center gap-2.5">

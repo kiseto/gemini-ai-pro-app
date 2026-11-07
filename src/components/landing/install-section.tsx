@@ -105,6 +105,7 @@ export function InstallSection() {
 									download="google-ai-pro-portal-v1.0.0.zip"
 									target="_blank"
 									rel="noreferrer noopener"
+									title="Download Google AI Pro Portal Extension (.zip)"
 									className="group relative flex h-11 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full border border-white/60 bg-linear-to-b from-white via-[#fafafa] to-[#e8e8e8] px-6 text-sm font-semibold text-neutral-900 shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-200 hover:from-white hover:to-[#f2f2f2] active:scale-[0.98]"
 								>
 									<Download className="size-4" />
@@ -115,6 +116,7 @@ export function InstallSection() {
 									href={APP_INFO.githubReleasesUrl}
 									target="_blank"
 									rel="noreferrer noopener"
+									title="View Releases and Changelog on GitHub"
 									className="flex h-9.5 items-center justify-center gap-2 rounded-full border border-border/80 bg-muted/30 px-5 text-xs font-medium text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground"
 								>
 									<span>GitHub Releases</span>

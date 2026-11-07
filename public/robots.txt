@@ -1,0 +1,43 @@
+# ==============================================================================
+# Robots.txt for Google AI Pro Portal
+# Canonical: https://gemini-ai-pro-portal.vercel.app/
+# ==============================================================================
+
+# Search engine crawlers
+User-agent: *
+Allow: /
+
+# Dedicated AI crawlers and assistants
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Host
+Host: https://gemini-ai-pro-portal.vercel.app
+
+# Sitemaps
+Sitemap: https://gemini-ai-pro-portal.vercel.app/sitemap.xml
+
+# LLM Documentation Index
+# See https://gemini-ai-pro-portal.vercel.app/llms.txt for machine-readable context
+

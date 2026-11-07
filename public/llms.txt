@@ -1,0 +1,35 @@
+# Google AI Pro Portal
+
+> An independent, open-source browser extension and companion portal for Google One 5TB promotional offer management and Google Play checkout price verification.
+
+Google AI Pro Portal provides automated client-side subscription tier configuration for eligible Google One subscribers along with real-time checkout safety verification inside the Google Play payment frame. The project operates 100% locally in the browser with zero external telemetry, zero server-side token forwarding, and strict CSP/TrustedTypes compliance.
+
+## Canonical Resources
+
+- [Companion Web Portal](https://gemini-ai-pro-portal.vercel.app/): Interactive landing page featuring an in-browser extension simulator, visual 24-month stacking timeline, and installation guide.
+- [Extension Package v1.0.0](https://github.com/nmrisrl11/gemini-ai-pro-app/releases/download/v1.0.0/google-ai-pro-portal-v1.0.0.zip): Pre-built Chromium extension ZIP archive (Manifest V3) ready for developer-mode installation.
+- [Full Documentation](https://gemini-ai-pro-portal.vercel.app/llms-full.txt): Comprehensive single-file documentation containing full technical specifications, architecture diagrams, stacking logic, and security disclosures.
+- [GitHub Repository](https://github.com/nmrisrl11/gemini-ai-pro-app): Open-source TypeScript monorepo containing both the web portal and browser extension source code.
+- [GitHub Releases](https://github.com/nmrisrl11/gemini-ai-pro-app/releases): Distribution archives, release tags, and version changelogs.
+
+## Extension Architecture
+
+- [Multi-World Execution](https://gemini-ai-pro-portal.vercel.app/#preview): Operates across 4 coordinated contexts: React Popup UI, Isolated-World Content Script, MAIN-World Request Interceptor on `one.google.com`, and MAIN-World Checkout Safety Guard on `tokenized.play.google.com`.
+- [Request Interception Engine](https://github.com/nmrisrl11/gemini-ai-pro-app/blob/main/src/extension/inject.ts): Hooks `XMLHttpRequest.prototype.send` to detect Google One `Ngbm` protobuf payloads and rewrite `/eacquire/multiline` acquisition parameters.
+- [Play Checkout Safety Guard](https://github.com/nmrisrl11/gemini-ai-pro-app/blob/main/src/extension/play-guard.ts): Executes exclusively within the tokenized Google Play checkout iframe (`tokenized.play.google.com`), inspecting live rendered terms for free trial ($0.00) vs paid terms before confirmation.
+
+## Promotional Tier Stacking
+
+- [Stacking Protocol](https://gemini-ai-pro-portal.vercel.app/#stacking): Sequential extension workflow enabling up to 24 months of promotional service on eligible accounts:
+  - **Tier 1 (12 Months)**: Base promotional tier for initial subscription setup.
+  - **Tier 2 (6 Months SS)**: Secondary extension layer stacking an additional 6 months (advancing renewal to month 18).
+  - **Tier 3 (6 Months)**: Tertiary extension layer stacking the final 6 months (totaling 24 months / 2 full years).
+  - **Tier 4 (6 Months Alt)**: Alternative fallback token for accounts encountering eligibility constraints.
+  - **Bypass / Disabled**: Pass-through mode disabling request hooks for standard Google One checkout.
+
+## Guides & Documentation
+
+- [Installation & Setup](https://gemini-ai-pro-portal.vercel.app/#install): Three-step guide to extract the extension ZIP, enable Developer Mode in `chrome://extensions`, and load unpacked.
+- [Frequently Asked Questions](https://gemini-ai-pro-portal.vercel.app/#faq): Authoritative answers covering regional profile requirements, non-renewal cancellation safety, and token rotation.
+- [Security & Privacy](https://github.com/nmrisrl11/gemini-ai-pro-app#security--privacy-disclosure): Detailed breakdown of zero-telemetry architecture, client-side token storage, and iframe isolation.
+

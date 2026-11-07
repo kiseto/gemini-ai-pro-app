@@ -195,6 +195,7 @@ export function PreviewSection() {
 								<img
 									src="/icons/512.png"
 									alt={APP_INFO.name}
+									title={APP_INFO.name}
 									draggable={false}
 									className="animate-gentle-float size-32 object-contain drop-shadow-[0_0_25px_rgba(245,158,11,0.35)] drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-all duration-300 select-none group-hover:scale-105 sm:size-40"
 								/>

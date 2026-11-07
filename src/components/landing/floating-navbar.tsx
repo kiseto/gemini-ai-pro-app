@@ -78,6 +78,7 @@ export function FloatingNavbar() {
 								href={`#${item.id}`}
 								onClick={(e) => handleNavClick(e, item.id)}
 								aria-current={isActive ? "page" : undefined}
+								title={`Navigate to ${item.label}`}
 								className={`rounded-full px-2.5 py-1 transition-all duration-200 sm:px-3 sm:py-1.5 ${
 									isActive
 										? "bg-primary/15 font-medium text-primary shadow-xs"
@@ -98,6 +99,7 @@ export function FloatingNavbar() {
 					target="_blank"
 					rel="noreferrer"
 					aria-label="GitHub Repository"
+					title="View Google AI Pro Portal on GitHub"
 					className="flex size-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground active:scale-95"
 				>
 					<GithubIcon className="size-3.5" />
@@ -109,6 +111,7 @@ export function FloatingNavbar() {
 					download="google-ai-pro-portal-v1.0.0.zip"
 					target="_blank"
 					rel="noreferrer noopener"
+					title="Download Google AI Pro Portal Extension (.zip)"
 					className="group relative inline-flex h-7.5 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-white/60 bg-linear-to-b from-white via-[#fafafa] to-[#e8e8e8] px-3.5 text-[11px] font-semibold text-neutral-900 shadow-[0_2px_8px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-200 hover:from-white hover:to-[#f2f2f2] active:scale-95 sm:h-8 sm:px-4.5 sm:text-xs"
 				>
 					Download

@@ -42,6 +42,7 @@
 - **🎨 Modern React 19 + Tailwind CSS v4 UI**: Built using Radix UI primitives and styled with Tailwind v4 CSS-first theming. Supports automatic system dark/light mode synchronization.
 - **🔒 Zero-Telemetry & Client-Side Privacy**: Runs 100% locally in your browser. No external API servers, no telemetry, no analytics, and zero tracking.
 - **⚙️ Configurable Token Overrides**: All tokens can be overridden live in the unlocked **Tokens** tab and stored locally in `chrome.storage.local`.
+- **🌐 Comprehensive SEO & LLM Ready**: Fully optimized with Open Graph preview assets (`og-image.png`), Twitter Cards, Schema.org JSON-LD structured data, XML sitemap, `robots.txt`, and conventional `llms.txt` / `llms-full.txt` files for AI agent context ingestion.
 - **📦 Clean Dual-Build Pipeline**: Single unified monorepo leveraging Vite 8 and `vite-plugin-web-extension` to build both the static web landing page (`dist/`) and the unpackable extension (`dist-ext/`).
 
 ---
@@ -135,9 +136,14 @@ Google One allows promotional offer stacking across eligible billing transitions
 
 ```
 gemini-ai-pro-app/
-├── public/                         # Unified static assets (copied to dist/ and dist-ext/)
+├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
 │   ├── favicon.ico                 # Root favicon
-│   ├── site.webmanifest            # PWA manifest
+│   ├── site.webmanifest            # Web application manifest
+│   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
+│   ├── robots.txt                  # Search engine and AI crawler directives
+│   ├── sitemap.xml                 # XML sitemap
+│   ├── llms.txt                    # LLM & AI agent structured context standard
+│   ├── llms-full.txt               # Expanded single-file documentation for LLMs
 │   └── icons/                      # Standard icons (16, 32, 48, 128, 180, 192, 512px)
 ├── src/
 │   ├── App.tsx                     # Landing page main component

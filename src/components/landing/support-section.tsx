@@ -79,6 +79,7 @@ export function SupportSection() {
 										<img
 											src={channel.qrImage}
 											alt={channel.qrAlt}
+											title={channel.qrAlt}
 											className="size-full object-contain"
 											width="160"
 											height="160"
@@ -99,6 +100,7 @@ export function SupportSection() {
 											href={channel.actionUrl}
 											target="_blank"
 											rel="noreferrer noopener"
+											title={channel.actionLabel}
 											className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-primary/25 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:border-primary/40 hover:bg-primary/20 active:scale-98"
 										>
 											<span>{channel.actionLabel}</span>
@@ -118,6 +120,7 @@ export function SupportSection() {
 								href={APP_INFO.devGithub}
 								target="_blank"
 								rel="noreferrer noopener"
+								title="Visit Nomer Israel's GitHub Profile"
 								className="font-medium text-primary hover:underline"
 							>
 								@nmrisrl11
@@ -127,6 +130,7 @@ export function SupportSection() {
 								href={APP_INFO.devUrl}
 								target="_blank"
 								rel="noreferrer noopener"
+								title="Visit nmrisrl.dev Portfolio"
 								className="text-foreground/80 transition-colors hover:text-foreground"
 							>
 								nmrisrl.dev

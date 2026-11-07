@@ -239,6 +239,7 @@ export function StackingSection() {
 											href={card.actionLink.url}
 											target="_blank"
 											rel="noreferrer"
+											title={card.actionLink.label}
 											className="inline-flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary/80 hover:underline"
 										>
 											<span>{card.actionLink.label}</span>

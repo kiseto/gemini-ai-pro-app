@@ -1,0 +1,146 @@
+# Google AI Pro Portal — Complete Technical & User Guide
+
+> Version: 1.0.0
+> Repository: https://github.com/nmrisrl11/gemini-ai-pro-app
+> Web Portal: https://gemini-ai-pro-portal.vercel.app/
+> License: MIT
+
+---
+
+## 1. Executive Summary
+
+Google AI Pro Portal is a dual-target monorepo combining:
+1. A modern, dark-mode web application and interactive extension sandbox built with React 19, Vite 8, and Tailwind CSS v4.
+2. An automated, client-side Manifest V3 browser extension for Google One 5TB Google AI Pro promotional offer management and Google Play checkout price verification.
+
+The project operates entirely client-side. It does not communicate with any external backend, API server, or analytics service. Network calls occur solely between the user's browser and official Google domains (one.google.com and play.google.com).
+
+---
+
+## 2. Multi-World Execution Architecture
+
+The browser extension coordinates four distinct execution contexts:
+
+### 2.1 Extension Popup UI (React 19)
+- Located at `src/extension/popup.tsx` and `src/extension/components/*`.
+- Composed of modular UI panels:
+  - Tiers Tab: Select between Tier 1 (12M), Tier 2 (6M SS), Tier 3 (6M), Tier 4 (6M Alt), or Bypass.
+  - 7-Step Guide Tab: Interactive connected timeline guiding the user through the subscription lifecycle.
+  - Stealth Developer Tokens Tab: Secret panel unlocked by clicking the popup header version badge 5 times, enabling custom promotional token overrides.
+- Communicates with the active Google One tab via `chrome.tabs.sendMessage`.
+
+### 2.2 Content Script (Isolated World)
+- Target: `https://one.google.com/*`
+- Runs in Chrome's ISOLATED world.
+- Reads and persists selected tiers and custom token overrides using `chrome.storage.local`.
+- Listens for runtime messages from the React popup and bridges state to the MAIN page world via `window.postMessage({ __gapt: 1, ... })`.
+
+### 2.3 Injector Script (MAIN World)
+- Target: `https://one.google.com/*`
+- Runs in Chrome's MAIN execution world (`world: "MAIN"`).
+- Hooks `XMLHttpRequest.prototype.send` to intercept Google One batch requests containing `f.req`.
+- Detects Google One `Ngbm` RPC calls and patches protobuf arrays with the Google AI Pro 5TB SKU (`subs:com.google.android.apps.subscriptions.red:g1.2tb.ai.subs_variant`) and active promotional token.
+- Hooks `HTMLIFrameElement.prototype.src` and TrustedTypes policies to rewrite `/eacquire/multiline` acquisition URL parameters.
+- Injects a floating dark-mode status widget onto `one.google.com` to confirm active tier status.
+
+### 2.4 Play Checkout Safety Guard (MAIN World Child Iframe)
+- Target: `https://tokenized.play.google.com/*`
+- Runs in Chrome's MAIN execution world with `all_frames: true`.
+- Guard condition: strictly verifies `window.top !== window` to ensure execution occurs exclusively inside Google Play's child checkout iframe.
+- TrustedTypes DOM Factory: Uses `createStyledElement<K>` to construct DOM nodes safely without `innerHTML`.
+- Dual scanning engine: MutationObserver combined with interval pollers at 1s, 2.5s, and 5s.
+- Price verification rules:
+  - Free trial terms: Detects strings like "$0.00", "0.00 USD", "€0.00", "£0.00", "Free trial", "Won't be charged".
+  - Paid terms: Detects strings like "Charged today", "Pay now", "Due now", "after trial", "/month", "/year".
+- Banner mounting:
+  - Safe ($0.00 verified): Mounts a high-contrast green safety banner confirming promotional terms.
+  - Warning (paid terms detected): Mounts a prominent red warning banner instructing the user not to confirm checkout.
+
+---
+
+## 3. Multi-Tier Promotional Stacking Specification
+
+Google One permits promotional subscription extensions to be stacked sequentially on eligible accounts:
+
+| Tier ID   | Display Name                | Months | Stacking Sequence | Purpose |
+| :-------- | :-------------------------- | :----: | :---------------: | :------ |
+| `"12m"`   | **Tier 1 · 12 Months**      |   12   |         1         | Base initial 1-year promotional subscription. |
+| `"6m_ss"` | **Tier 2 · 6 Months (SS)**  |   6    |         2         | Secondary extension applied to active Tier 1 (extends renewal to month 18). |
+| `"6m"`    | **Tier 3 · 6 Months**       |   6    |         3         | Tertiary extension layer applied to active Tier 2 (stacks to 24 months total). |
+| `"6m_2"`  | **Tier 4 · 6 Months (Alt)** |   6    |         -         | Fallback token if Tier 2 or 3 encounters regional eligibility constraints. |
+| `"off"`   | **Bypass / Disabled**       |   0    |         -         | Passes standard Google One requests through without modification. |
+
+### How 24-Month Stacking Operates
+1. Ensure your Google account has a US billing payment profile or eligible promotional region.
+2. In the extension popup, select **Tier 1 (12 Months)**.
+3. Open `one.google.com/plans`, initiate the 5TB AI Pro subscription checkout, and verify the green safety banner displays **$0.00**. Complete checkout.
+4. Return to the extension popup and switch to **Tier 2 (6 Months SS)**.
+5. Repeat the plan selection on Google One to apply the extension. The safety banner again verifies $0.00.
+6. Switch to **Tier 3 (6 Months)** and apply the final extension.
+7. Total accumulated duration: 24 months (2 full years) of Google One 5TB storage and Gemini Advanced.
+8. To avoid subsequent auto-renewal charges at month 24, visit `play.google.com/store/account/subscriptions` and cancel subscription renewal. All 24 months remain active.
+
+---
+
+## 4. Installation & Setup Guide
+
+### Method A: Pre-Packaged Release Archive
+1. Download the latest `google-ai-pro-portal-v1.0.0.zip` from https://github.com/nmrisrl11/gemini-ai-pro-app/releases.
+2. Extract the ZIP archive to a permanent folder on your computer.
+3. Open any Chromium browser (Google Chrome, Brave, Microsoft Edge, Opera).
+4. Navigate to `chrome://extensions` (or `edge://extensions`, `brave://extensions`).
+5. Toggle **Developer mode** in the upper-right corner.
+6. Click **Load unpacked** and select the extracted `extension` directory.
+7. Pin the extension to your browser toolbar.
+
+### Method B: Building from Source
+```bash
+# Clone the repository
+git clone https://github.com/nmrisrl11/gemini-ai-pro-app.git
+cd gemini-ai-pro-app
+
+# Install dependencies
+npm install
+
+# Build web application
+npm run build
+
+# Build browser extension
+npm run build:ext
+
+# Package release zip
+npm run pack:ext
+```
+
+---
+
+## 5. Frequently Asked Questions
+
+### Q1: Why are promotional offer tiers regionally specific?
+Google configures its promotional offer SKUs for specific regional billing configurations (primarily US). Google Play evaluates offer eligibility and calculates checkout pricing according to the region and currency settings of your Google payment profile.
+
+### Q2: How does the Checkout Safety Guard protect me from accidental charges?
+The safety guard executes directly inside Google Play's tokenized checkout iframe (`tokenized.play.google.com`). Before you confirm, it inspects the live rendered pricing terms. If terms like 'Free trial' and '$0.00' are verified, it mounts a green safety banner. If it detects any paid terms—such as 'Charged today' or 'Pay now'—it surfaces a prominent red warning instructing you not to proceed.
+
+### Q3: How does the 24-month stacking sequence work?
+Google One allows promotional SKUs to be applied sequentially as subscription extensions. Applying Tier 1 grants 12 months. Applying Tier 2 stacks an extra 6 months (advancing renewal to month 18). Finally, applying Tier 3 adds another 6 months, locking in the maximum allowable 24 months (2 full years) on a single Google account.
+
+### Q4: Will Google automatically bill my card when the promotional period ends?
+Not if you cancel renewal. Once all tiers are stacked, open `play.google.com/store/account/subscriptions` and cancel the subscription. Google's policy guarantees that all 24 months of promotional 5TB storage and Gemini Advanced remain fully valid until expiration, after which your account simply reverts to the free tier with zero charges.
+
+### Q5: Where do promotional tokens come from and how are they kept updated?
+Promotional offer tokens correspond to official Google One promotional campaigns (such as hardware bundles and partner promotions). When campaigns rotate or renew, updated extension builds are published on GitHub. The extension also supports local storage overrides, allowing developers to configure custom token parameters without rebuilding from source.
+
+### Q6: Does this extension send any account data or tokens to an external server?
+None. The extension runs 100% client-side in your browser with zero remote backend, analytics, or telemetry tracking. Network requests only occur between your browser and official Google domains (`one.google.com` and `play.google.com`).
+
+---
+
+## 6. Security, Privacy & Compliance Disclosures
+
+- **100% Client-Side**: No remote servers, external databases, or third-party proxies.
+- **Zero Telemetry**: No tracking scripts, analytics cookies, or identity fingerprinting.
+- **No Token Harvesting**: Custom and configured offer tokens reside strictly in your local browser storage (`chrome.storage.local`).
+- **Strict TrustedTypes**: Code execution strictly avoids `innerHTML`, `eval`, and unsafe DOM factories.
+- **Trademark Disclaimer**: Google, Google One, Google Play, and Gemini are trademarks of Google LLC. Google AI Pro Portal is an independent open-source project and is not affiliated with, sponsored by, or endorsed by Google LLC or Alphabet Inc.
+

@@ -26,7 +26,7 @@
   - `name`: `"Google AI Pro Portal"`
   - `shortName`: `"AI Pro Portal"`
   - `version`: `"1.0.0"`
-  - `title`, `tagline`, `description`, `author`, `githubUrl`, `githubReleasesUrl`, `releaseZipUrl`, `appUrl`, `googleOneUrl`, `googlePlaySubsUrl`.
+  - `title`, `tagline`, `description`, `author`, `githubUrl`, `githubReleasesUrl`, `releaseZipUrl`, `appUrl`, `googleOneUrl`, `googlePlaySubsUrl`, `ogImagePath`, `ogImageUrl`, `sitemapUrl`, `robotsUrl`, `llmsUrl`, `llmsFullUrl`.
 - **CRITICAL**: Do **NOT** reintroduce environment variables for static metadata (e.g., `VITE_APP_NAME`).
 
 ### Rule 2.2 — Environment Variables Scope
@@ -43,11 +43,17 @@
 
 ### Rule 2.3 — Static Asset Unification
 
-- All icons and favicon assets live strictly in [`public/`](file:///public/):
+- All icons, favicons, and public web/SEO assets live strictly in [`public/`](file:///public/):
   - `public/favicon.ico`
   - `public/site.webmanifest`
+  - `public/og-image.png` (1200x630 Open Graph preview)
+  - `public/robots.txt`
+  - `public/sitemap.xml`
+  - `public/llms.txt`
+  - `public/llms-full.txt`
   - `public/icons/` (`16.png`, `32.png`, `48.png`, `128.png`, `180.png`, `192.png`, `512.png`)
-- Vite automatically copies the entire `public/` directory into both `dist/` and `dist-ext/` during compilation.
+- Vite automatically copies the entire `public/` directory into `dist/` during web compilation.
+- The extension packaging pipeline explicitly filters web-only assets out of `dist-ext/` and zip archives.
 - **NEVER** create separate duplicate folders such as `src/extension/icons/` or `public/releases/`.
 
 ---
@@ -171,6 +177,14 @@ The extension supports 4 promotional tiers and 1 bypass tier defined in [`src/co
 - **CSP & TrustedTypes Safety**: Content and injection scripts (`play-guard.ts`, `inject.ts`) MUST NOT use `innerHTML`. Use `createStyledElement`, `createElementNS`, `textContent`, and safe DOM manipulation.
 - **Stealth Developer Mode UX**: The secret Tokens tab is unlocked strictly via 5 clicks on the popup header's version badge. Do not add explicit cursor pointers or hover indications that compromise stealth discovery.
 
+### 5.5 SEO, Semantic HTML & Accessibility Standards
+
+- **Title Tag Character Count**: Strictly between **50 and 60 characters** to ensure visibility across search engine result pages (SERPs) without truncation.
+- **Meta Description**: Calibrated to **150–160 characters** to fit search snippet containers.
+- **Image Accessibility (`<img>`)**: All `<img>` elements must specify both descriptive `alt` and `title` attributes.
+- **Link Accessibility (`<a>`)**: All `<a>` anchor elements must specify descriptive `title` attributes (e.g. for in-page anchors, binary downloads, external repositories, and documentation).
+- **Conventional AI Documentation**: Maintain [`public/llms.txt`](file:///public/llms.txt) and [`public/llms-full.txt`](file:///public/llms-full.txt) in compliance with the [llmstxt.org](https://llmstxt.org) standard.
+
 ---
 
 ## 6. Build & Packaging Pipelines
@@ -194,7 +208,7 @@ cmd /c npm run pack:ext
 
 - Orchestrated by [`vite.ext.config.ts`](file:///vite.ext.config.ts) using `vite-plugin-web-extension`.
 - Compiles `popup.html`, `content.ts`, `inject.ts`, and `play-guard.ts` into [`dist-ext/`](file:///dist-ext/).
-- Copies strictly necessary extension assets ([`public/icons/`](file:///public/icons)) into `dist-ext/`, explicitly stripping web-only assets (`images/`, `favicon.ico`, `site.webmanifest`).
+- Copies strictly necessary extension assets ([`public/icons/`](file:///public/icons)) into `dist-ext/`, explicitly stripping web-only assets (`images/`, `favicon.ico`, `site.webmanifest`, `og-image.png`, `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`).
 - [`scripts/pack-extension.js`](file:///scripts/pack-extension.js) stages compiled `dist-ext/` assets into an `extension/` subfolder alongside `INSTRUCTIONS.txt`, then packages them using PowerShell `Compress-Archive` into [`releases/google-ai-pro-portal-v1.0.0.zip`](file:///releases).
 
 ---
@@ -206,6 +220,11 @@ gemini-ai-pro-app/
 ├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
 │   ├── favicon.ico                 # 32x32 ICO
 │   ├── site.webmanifest            # Web application manifest
+│   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
+│   ├── robots.txt                  # Search engine and AI crawler directives
+│   ├── sitemap.xml                 # XML sitemap
+│   ├── llms.txt                    # LLM & AI agent structured context standard
+│   ├── llms-full.txt               # Expanded single-file documentation for LLMs
 │   └── icons/                      # 16, 32, 48, 128, 180, 192, 512px transparent PNGs
 ├── src/
 │   ├── App.tsx                     # Landing page parent component

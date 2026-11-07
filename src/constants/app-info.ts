@@ -5,7 +5,7 @@ export const APP_INFO = {
 	tagline: "Open-Source Promotional Companion & Checkout Guard for Google One",
 	title: "Google AI Pro Portal",
 	description:
-		"An independent, client-side browser extension and companion tool that helps Google One subscribers apply eligible promotional tiers and verifies checkout pricing in real time.",
+		"An independent, client-side browser extension that helps Google One subscribers apply eligible promotional tiers and verifies checkout pricing in real time.",
 	shortDescription:
 		"Apply eligible promotional offer tiers with real-time checkout price verification.",
 	author: "Antigravity Engineering",
@@ -14,6 +14,12 @@ export const APP_INFO = {
 	releaseZipUrl:
 		"https://github.com/nmrisrl11/gemini-ai-pro-app/releases/download/v1.0.0/google-ai-pro-portal-v1.0.0.zip",
 	appUrl: "https://gemini-ai-pro-portal.vercel.app",
+	ogImagePath: "/og-image.png",
+	ogImageUrl: "https://gemini-ai-pro-portal.vercel.app/og-image.png",
+	sitemapUrl: "https://gemini-ai-pro-portal.vercel.app/sitemap.xml",
+	robotsUrl: "https://gemini-ai-pro-portal.vercel.app/robots.txt",
+	llmsUrl: "https://gemini-ai-pro-portal.vercel.app/llms.txt",
+	llmsFullUrl: "https://gemini-ai-pro-portal.vercel.app/llms-full.txt",
 	googleOneUrl: "https://one.google.com/plans",
 	googlePlaySubsUrl: "https://play.google.com/store/account/subscriptions",
 	bmcUrl: "https://buymeacoffee.com/nmrisrl11",

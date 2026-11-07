@@ -1,11 +1,27 @@
 {
+	"id": "google-ai-pro-portal",
 	"name": "Google AI Pro Portal",
 	"short_name": "AI Pro Portal",
+	"description": "An independent, client-side browser extension and companion tool that helps Google One subscribers apply eligible promotional tiers and verifies checkout pricing in real time.",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#12100f",
+	"theme_color": "#12100f",
+	"categories": ["utilities", "productivity"],
 	"icons": [
-		{ "src": "/icons/192.png", "sizes": "192x192", "type": "image/png" },
-		{ "src": "/icons/512.png", "sizes": "512x512", "type": "image/png" }
-	],
-	"theme_color": "#18181b",
-	"background_color": "#09090b",
-	"display": "standalone"
+		{
+			"src": "/icons/192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/icons/512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	]
 }

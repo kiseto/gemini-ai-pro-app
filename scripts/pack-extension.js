@@ -47,6 +47,11 @@ try {
 		path.join(stagingExtDir, "images"),
 		path.join(stagingExtDir, "favicon.ico"),
 		path.join(stagingExtDir, "site.webmanifest"),
+		path.join(stagingExtDir, "og-image.png"),
+		path.join(stagingExtDir, "robots.txt"),
+		path.join(stagingExtDir, "sitemap.xml"),
+		path.join(stagingExtDir, "llms.txt"),
+		path.join(stagingExtDir, "llms-full.txt"),
 	];
 	for (const item of unusedExtAssets) {
 		if (fs.existsSync(item)) {
