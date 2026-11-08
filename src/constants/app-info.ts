@@ -11,8 +11,9 @@ export const APP_INFO = {
 	author: "Antigravity Engineering",
 	githubUrl: "https://github.com/nmrisrl11/gemini-ai-pro-app",
 	githubReleasesUrl: "https://github.com/nmrisrl11/gemini-ai-pro-app/releases",
-	releaseZipUrl:
+	githubReleaseZipUrl:
 		"https://github.com/nmrisrl11/gemini-ai-pro-app/releases/download/v1.0.0/google-ai-pro-portal-v1.0.0.zip",
+	releaseZipUrl: "https://download.nmrisrl.dev/google-ai-pro-portal-v1.0.0.zip",
 	appUrl: "https://gemini-ai-pro-portal.vercel.app",
 	ogImagePath: "/og-image.png",
 	ogImageUrl: "https://gemini-ai-pro-portal.vercel.app/og-image.png",
