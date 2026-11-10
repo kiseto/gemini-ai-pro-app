@@ -7,6 +7,7 @@ interface SupportChannel {
 	type: string;
 	methods: string;
 	qrImage: string;
+	qrWebp?: string;
 	qrAlt: string;
 	instruction: string;
 	actionUrl?: string;
@@ -20,6 +21,7 @@ const SUPPORT_CHANNELS: SupportChannel[] = [
 		type: "Global / International",
 		methods: "Cards · Apple Pay · Google Pay",
 		qrImage: "/images/qrcode-bmc.png",
+		qrWebp: "/images/qrcode-bmc.webp",
 		qrAlt: "Buy Me a Coffee QR Code",
 		instruction: "Scan with camera or click below",
 		actionUrl: APP_INFO.bmcUrl,
@@ -31,6 +33,7 @@ const SUPPORT_CHANNELS: SupportChannel[] = [
 		type: "Direct Instant Transfer",
 		methods: "GCash · Maya · InstaPay Banking",
 		qrImage: "/images/qrcode-gcash.jpg",
+		qrWebp: "/images/qrcode-gcash.webp",
 		qrAlt: "GCash / QR Ph QR Code",
 		instruction: "Scan with any PH banking app",
 	},
@@ -76,16 +79,19 @@ export function SupportSection() {
 
 									{/* QR Code Frame */}
 									<div className="mt-4 flex size-40 items-center justify-center rounded-xl border border-border/60 bg-white p-2.5 shadow-md">
-										<img
-											src={channel.qrImage}
-											alt={channel.qrAlt}
-											title={channel.qrAlt}
-											className="size-full object-contain"
-											width="160"
-											height="160"
-											loading="lazy"
-											decoding="async"
-										/>
+										<picture className="flex size-full items-center justify-center">
+											{channel.qrWebp && <source srcSet={channel.qrWebp} type="image/webp" />}
+											<img
+												src={channel.qrImage}
+												alt={channel.qrAlt}
+												title={channel.qrAlt}
+												className="size-full object-contain"
+												width="160"
+												height="160"
+												loading="lazy"
+												decoding="async"
+											/>
+										</picture>
 									</div>
 
 									<span className="mt-3 font-mono text-[11px] text-muted-foreground">

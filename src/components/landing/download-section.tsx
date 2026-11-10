@@ -40,13 +40,18 @@ export function DownloadSection() {
 			{/* Centered Content: [Logo] -> [Headline] -> [Description] -> [CTA] -> [Proofline] */}
 			<div className="relative z-10 flex w-full max-w-2xl flex-col items-center text-center">
 				{/* Logo: Signature tilted app icon */}
-				<img
-					src="/icons/512.png"
-					alt={APP_INFO.name}
-					title={APP_INFO.name}
-					draggable={false}
-					className="size-24 rotate-[-7deg] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.55)] select-none sm:size-28"
-				/>
+				<picture className="size-24 select-none sm:size-28">
+					<source srcSet="/icons/512.webp" type="image/webp" />
+					<img
+						src="/icons/512.png"
+						alt={APP_INFO.name}
+						title={APP_INFO.name}
+						draggable={false}
+						width={112}
+						height={112}
+						className="size-full rotate-[-7deg] object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.55)] select-none"
+					/>
+				</picture>
 
 				{/* Headline: High-impact display typography */}
 				<h2 className="mt-7 text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl md:leading-[1.15]">

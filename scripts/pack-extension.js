@@ -53,6 +53,9 @@ try {
 		path.join(stagingExtDir, "llms.txt"),
 		path.join(stagingExtDir, "llms-full.txt"),
 		path.join(stagingExtDir, "404.html"),
+		path.join(stagingExtDir, "icons", "512.png"),
+		path.join(stagingExtDir, "icons", "512.webp"),
+		path.join(stagingExtDir, "icons", "180.png"),
 	];
 	for (const item of unusedExtAssets) {
 		if (fs.existsSync(item)) {

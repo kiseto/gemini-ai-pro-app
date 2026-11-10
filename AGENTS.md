@@ -51,9 +51,11 @@
   - `public/sitemap.xml`
   - `public/llms.txt`
   - `public/llms-full.txt`
-  - `public/icons/` (`16.png`, `32.png`, `48.png`, `128.png`, `180.png`, `192.png`, `512.png`)
+  - `public/icons/` (`16.png`, `32.png`, `48.png`, `128.png`, `180.png`, `192.png`, `512.png`, `512.webp`)
+  - `public/images/` (`qrcode-bmc.png`, `qrcode-bmc.webp`, `qrcode-gcash.jpg`, `qrcode-gcash.webp`)
 - Vite automatically copies the entire `public/` directory into `dist/` during web compilation.
-- The extension packaging pipeline explicitly filters web-only assets out of `dist-ext/` and zip archives.
+- The extension packaging pipeline explicitly filters web-only assets (`images/`, `favicon.ico`, `512.webp`, `512.png`, `180.png`, etc.) out of `dist-ext/` and zip archives.
+- All static media must use modern formats (WebP `<picture>` wrappers) and declare aggressive `Cache-Control` in `vercel.json` to prevent unnecessary bandwidth consumption.
 - **NEVER** create separate duplicate folders such as `src/extension/icons/` or `public/releases/`.
 
 ---
@@ -218,14 +220,15 @@ cmd /c npm run pack:ext
 ```
 gemini-ai-pro-app/
 ├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
-│   ├── favicon.ico                 # Multi-resolution ICO (16x16 to 256x256)
+│   ├── favicon.ico                 # Multi-resolution ICO (16, 32, 48px)
 │   ├── site.webmanifest            # Web application manifest
 │   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
 │   ├── robots.txt                  # Search engine and AI crawler directives
 │   ├── sitemap.xml                 # XML sitemap
 │   ├── llms.txt                    # LLM & AI agent structured context standard
 │   ├── llms-full.txt               # Expanded single-file documentation for LLMs
-│   └── icons/                      # 16, 32, 48, 128, 180, 192, 512px transparent PNGs
+│   ├── icons/                      # 16, 32, 48, 128, 180, 192, 512px PNGs and 512.webp
+│   └── images/                     # WebP & optimized donation QR codes (qrcode-bmc, qrcode-gcash)
 ├── src/
 │   ├── App.tsx                     # Landing page parent component
 │   ├── main.tsx                    # Landing page React DOM root
@@ -267,7 +270,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
-├── vercel.json                     # Vercel SPA routing and rewrite rules
+├── vercel.json                     # Vercel SPA routing, CDN Cache-Control headers, and rewrite rules
 ├── AGENTS.md                       # This agent specification document
 ├── README.md                       # Public product documentation
 └── package.json                    # Project dependencies and npm scripts

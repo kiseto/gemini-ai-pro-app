@@ -56,10 +56,22 @@ export default defineConfig(() => {
 					const srcIcons = path.resolve(import.meta.dirname, "./public/icons");
 					const destIcons = path.join(distExt, "icons");
 
-					// Ensure only extension icons are present
+					// Ensure only required extension icons are present
 					if (fs.existsSync(srcIcons)) {
 						fs.mkdirSync(destIcons, { recursive: true });
-						fs.cpSync(srcIcons, destIcons, { recursive: true });
+						const manifestIcons = new Set(["16.png", "32.png", "48.png", "128.png", "192.png"]);
+						for (const icon of manifestIcons) {
+							const srcFile = path.join(srcIcons, icon);
+							if (fs.existsSync(srcFile)) {
+								fs.copyFileSync(srcFile, path.join(destIcons, icon));
+							}
+						}
+						// Clean any non-manifest icons from destIcons
+						for (const file of fs.readdirSync(destIcons)) {
+							if (!manifestIcons.has(file)) {
+								fs.rmSync(path.join(destIcons, file), { force: true });
+							}
+						}
 					}
 
 					// Remove any web-only assets if copied by bundler

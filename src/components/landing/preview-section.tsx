@@ -192,13 +192,18 @@ export function PreviewSection() {
 								className="group relative z-10 flex cursor-pointer items-center justify-center border-none p-3 transition-transform outline-none focus:border-none focus:ring-0 focus:outline-none active:scale-95"
 								aria-label="Click to open live extension simulation"
 							>
-								<img
-									src="/icons/512.png"
-									alt={APP_INFO.name}
-									title={APP_INFO.name}
-									draggable={false}
-									className="animate-gentle-float size-32 object-contain drop-shadow-[0_0_25px_rgba(245,158,11,0.35)] drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-all duration-300 select-none group-hover:scale-105 sm:size-40"
-								/>
+								<picture className="animate-gentle-float size-32 select-none group-hover:scale-105 sm:size-40">
+									<source srcSet="/icons/512.webp" type="image/webp" />
+									<img
+										src="/icons/512.png"
+										alt={APP_INFO.name}
+										title={APP_INFO.name}
+										draggable={false}
+										width={160}
+										height={160}
+										className="size-full object-contain drop-shadow-[0_0_25px_rgba(245,158,11,0.35)] drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-all duration-300 select-none"
+									/>
+								</picture>
 							</button>
 
 							{/* Right Decorative Handwritten Hint: Try extension! */}

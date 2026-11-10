@@ -37,13 +37,18 @@ export function Hero() {
 			{/* Centered Content: [Logo] -> [Title] -> [Description] -> [CTA] */}
 			<div className="relative z-10 flex w-full max-w-2xl flex-col items-center text-center">
 				{/* [Logo]: Clean tilted app icon without card container */}
-				<img
-					src="/icons/512.png"
-					alt={APP_INFO.name}
-					title={APP_INFO.name}
-					draggable={false}
-					className="size-32 rotate-[-8deg] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.55)] select-none sm:size-40"
-				/>
+				<picture className="size-32 select-none sm:size-40">
+					<source srcSet="/icons/512.webp" type="image/webp" />
+					<img
+						src="/icons/512.png"
+						alt={APP_INFO.name}
+						title={APP_INFO.name}
+						draggable={false}
+						width={160}
+						height={160}
+						className="size-full rotate-[-8deg] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.55)] select-none"
+					/>
+				</picture>
 
 				{/* [Title]: App Name with clean, high-impact display typography */}
 				<h1 className="mt-8 text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-6xl md:text-7xl md:leading-[1.1]">

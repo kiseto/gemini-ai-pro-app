@@ -138,14 +138,15 @@ Google One allows promotional offer stacking across eligible billing transitions
 ```
 gemini-ai-pro-app/
 ├── public/                         # Public assets (icons/ auto-copied to dist/ and dist-ext/; web assets to dist/)
-│   ├── favicon.ico                 # Multi-resolution favicon (16x16 to 256x256)
+│   ├── favicon.ico                 # Multi-resolution favicon (16, 32, 48px)
 │   ├── site.webmanifest            # Web application manifest
 │   ├── og-image.png                # 1200x630 Open Graph / Twitter sharing image
 │   ├── robots.txt                  # Search engine and AI crawler directives
 │   ├── sitemap.xml                 # XML sitemap
 │   ├── llms.txt                    # LLM & AI agent structured context standard
 │   ├── llms-full.txt               # Expanded single-file documentation for LLMs
-│   └── icons/                      # Standard icons (16, 32, 48, 128, 180, 192, 512px)
+│   ├── icons/                      # Web & extension icons (16, 32, 48, 128, 180, 192, 512px, 512.webp)
+│   └── images/                     # WebP & optimized donation QR codes (qrcode-bmc, qrcode-gcash)
 ├── src/
 │   ├── App.tsx                     # Landing page main component
 │   ├── main.tsx                    # Landing page entrypoint
@@ -196,7 +197,7 @@ gemini-ai-pro-app/
 ├── .env                            # Local private tokens configuration (gitignored)
 ├── vite.config.ts                  # Vite configuration for Web Landing Page
 ├── vite.ext.config.ts              # Vite configuration for Browser Extension
-├── vercel.json                     # Vercel SPA routing and rewrite rules
+├── vercel.json                     # Vercel SPA routing, CDN Cache-Control headers, and rewrite rules
 ├── AGENTS.md                       # Comprehensive guide for AI agents and developers
 └── package.json                    # Project scripts and dependencies
 ```
