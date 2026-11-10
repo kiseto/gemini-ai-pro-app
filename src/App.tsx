@@ -9,7 +9,6 @@ import { PreviewSection } from "@/components/landing/preview-section";
 import { StackingSection } from "@/components/landing/stacking-section";
 import { SupportSection } from "@/components/landing/support-section";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useEffect, useState } from "react";
 
 function isNonExistentPath(): boolean {
@@ -39,7 +38,6 @@ export function App() {
 			<>
 				<NotFoundPage onNavigateHome={handleNavigateHome} />
 				<Analytics />
-				<SpeedInsights />
 			</>
 		);
 	}
@@ -58,7 +56,6 @@ export function App() {
 			</main>
 			<Footer />
 			<Analytics />
-			<SpeedInsights />
 		</div>
 	);
 }
